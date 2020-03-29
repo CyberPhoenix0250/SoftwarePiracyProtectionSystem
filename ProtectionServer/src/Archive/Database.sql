@@ -25,6 +25,8 @@ SELECT * FROM LicenseTable;
 
 select Count(*) from LicenseTable;
 
+UPDATE LicenseTable SET MAC = '04:d4:c4:7b:d4:86', FNAME = 'Jonathan', LNAME = 'James', REGDATE = '12-04-2020' WHERE LICENSE = 'NS21H1X29HQ326V67G44L845';
+
 
 select * from LicenseTable where ID LIKE "%G4%" OR MAC LIKE "%G4%" OR LICENSE LIKE "%G4%" OR MD5 LIKE "%G4%" OR FNAME LIKE "%G4%" OR LNAME LIKE "%G4%" OR REGDATE LIKE "%G4%";
 

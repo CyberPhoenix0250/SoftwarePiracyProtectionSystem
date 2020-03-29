@@ -1,14 +1,15 @@
 package Server;
 
+import java.util.Date;
+
 class AccessCode
 {
-	private Database db;
-	public AccessCode(String mac)
+	public String getAccessCode(String license, String mac)
 	{
 		
 	}
-//	private boolean isKeyPresent()
-//	{
-//		
-//	}
+	public static void main(String args[])
+	{
+		
+	}
 }

@@ -12,12 +12,14 @@ class Database
 {
 	private Statement statement;
 	private ResultSet result;
+
 	public Database()
 	{
 		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/LicenseDatabase?serverTimezone=UTC", "root","AdminRoot4!");
+			Connection conn = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/LicenseDatabase?serverTimezone=UTC", "root", "AdminRoot4!");
 			statement = conn.createStatement();
 		} catch (Exception e)
 		{
@@ -27,21 +29,23 @@ class Database
 		}
 	}
 
-	
 	public Object[][] search(String skey)
 	{
 		Object[][] res = null;
-		int i = 0,count = 0;
+		int i = 0, count = 0;
 		try
 		{
-			result = statement.executeQuery("select ID, LICENSE, FNAME, LNAME, REGDATE from LicenseTable where ID LIKE '%"+skey+"%' OR LICENSE LIKE '%"+skey+"%' OR FNAME LIKE '%"+skey+"%' OR LNAME LIKE '%"+skey+"%' OR REGDATE LIKE '%"+skey+"%';");
+			result = statement
+					.executeQuery("select ID, LICENSE, FNAME, LNAME, REGDATE from LicenseTable where ID LIKE '%" + skey
+							+ "%' OR LICENSE LIKE '%" + skey + "%' OR FNAME LIKE '%" + skey + "%' OR LNAME LIKE '%"
+							+ skey + "%' OR REGDATE LIKE '%" + skey + "%';");
 			do
 			{
-				count=count+1;
-			}while(result.next());
+				count = count + 1;
+			} while (result.next());
 			res = new Object[count][5];
 			result.first();
-			if(count != 0)
+			if (count != 0)
 			{
 				do
 				{
@@ -50,8 +54,8 @@ class Database
 					res[i][2] = result.getString(3);
 					res[i][3] = result.getString(4);
 					res[i][4] = result.getString(5);
-					i=i+1;
-				}while(result.next());
+					i = i + 1;
+				} while (result.next());
 			}
 		} catch (SQLException e)
 		{
@@ -59,11 +63,11 @@ class Database
 			res[0][1] = "No results";
 			res[0][2] = "No results";
 			res[0][3] = "No results";
-			res[0][4] = "No results"; 
+			res[0][4] = "No results";
 		}
 		return res;
-	}	
-	
+	}
+
 	// this function is for ShowDatabase only.
 	public Object[][] fetchAll()
 	{
@@ -90,11 +94,12 @@ class Database
 		}
 		return data;
 	}
+
 	public boolean insertKey(String key, String md5)
 	{
 		try
 		{
-			statement.execute("INSERT INTO LicenseTable(LICENSE,MD5) VALUES('"+key+"','"+md5+"');");
+			statement.execute("INSERT INTO LicenseTable(LICENSE,MD5) VALUES('" + key + "','" + md5 + "');");
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
@@ -104,6 +109,7 @@ class Database
 		}
 		return true;
 	}
+
 	public int getNumberOfRows()
 	{
 		int num = -1;
@@ -124,7 +130,7 @@ class Database
 		String key = null;
 		try
 		{
-			result = statement.executeQuery("select LICENSE FROM LicenseTable WHERE ID = '"+index+"';");
+			result = statement.executeQuery("select LICENSE FROM LicenseTable WHERE ID = '" + index + "';");
 			result.first();
 			key = result.getString(1);
 		} catch (SQLException e)
@@ -133,58 +139,120 @@ class Database
 		}
 		return key;
 	}
-	
+
 	public boolean removeRow(String key)
 	{
 		try
 		{
-			statement.execute("delete from LicenseTable where ID= '"+key+"';");
+			statement.execute("delete from LicenseTable where ID= '" + key + "';");
 		} catch (SQLException e)
 		{
 			return false;
 		}
 		return true;
 	}
+
 	public int[] getAllIndex()
 	{
 		int[] index = null;
-		int count=0;
+		int count = 0;
 		try
 		{
 			result = statement.executeQuery("SELECT ID from LicenseTable;");
-			for(count = 0 ; result.next() ; count++);
+			for (count = 0; result.next(); count++)
+				;
 			index = new int[count];
 			result.first();
 			int i = 0;
 			do
 			{
 				index[i] = result.getInt(1);
-				i=i+1;
-			}while(result.next());
+				i = i + 1;
+			} while (result.next());
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
 		return index;
 	}
+
 	public boolean isKeyPresent(String md5)
 	{
 		boolean isTrue = false;
 		try
 		{
-			result = statement.executeQuery("SELECT * FROM LicenseTable WHERE MD5 = '"+md5+"';");
+			result = statement.executeQuery("SELECT * FROM LicenseTable WHERE MD5 = '" + md5 + "';");
 			result.first();
-			if(result.isFirst() && result.isLast())
+			if (result.isFirst() && result.isLast())
 			{
 				isTrue = true;
-			}
-			else
+			} else
 			{
 				isTrue = false;
 			}
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
+		}
+		return isTrue;
+	}
+
+	public String getKey(String md5)
+	{
+		String key = "";
+		if (isKeyPresent(md5))
+		{
+			try
+			{
+				result = statement.executeQuery("SELECT LICENSE FROM LicenseTable WHERE MD5 = '" + md5 + "';");
+				result.first();
+				key = result.getString(1);
+			} catch (SQLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else
+		{
+			key = "Empty";
+		}
+		return key;
+	}
+
+	public boolean isMacAssociated(String md5)
+	{
+		String mac = "";
+		try
+		{
+			result = statement.executeQuery("SELECT MAC FROM LicenseTable WHERE MD5 = '" + md5 + "';");
+			result.first();
+			mac = result.getString(1);
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (mac.equals("empty"))
+		{
+			return false;
+		} else
+		{
+			return true;
+		}
+	}
+
+	public boolean updateCredentials(String license, String mac, String fname, String lname, String regdate)
+	{
+		boolean isTrue = false;
+
+		try
+		{
+			result = statement.executeQuery("UPDATE LicenseTable SET MAC = '" + mac + "', FNAME = '" + fname
+					+ "', LNAME = '" + lname + "', REGDATE = '" + regdate + "' WHERE LICENSE = '" + license + "';");
+			isTrue = true;
+		} catch (SQLException e)
+		{
+			isTrue = false;
 		}
 		return isTrue;
 	}
