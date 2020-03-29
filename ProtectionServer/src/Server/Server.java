@@ -1,0 +1,166 @@
+package Server;
+
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import java.awt.Color;
+import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.Toolkit;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+class Server
+{
+	private JFrame window;
+	private JTable table;
+	private DefaultTableModel tableModel;
+	private int serial;
+	private Memory m;
+	private boolean running;
+	private API api;
+	public Server()
+	{
+		m = new Memory();
+		serial = 0;
+		running = true;
+		
+		try
+		{
+			UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+			// UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
+			// UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+			// UIManager.setLookAndFeel("com.jtattoo.plaf.bernstein.BernsteinLookAndFeel");
+			// UIManager.setLookAndFeel("com.jtattoo.plaf.fast.FastLookAndFeel");
+			// UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+			// UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
+			// UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
+			// UIManager.setLookAndFeel("com.jtattoo.plaf.mint.MintLookAndFeel");
+			// UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
+			// UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+			// UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+		} catch (Exception ignored)
+		{
+		}
+		window = new JFrame("Software Piracy Protection System");
+		window.getContentPane().setBackground(new Color(102, 153, 255));
+		window.setBounds(450, 50, 1000, 700);
+		window.setResizable(false);
+		window.setIconImage(Toolkit.getDefaultToolkit().getImage(Server.class.getResource("/Images/shield.png")));
+		window.getContentPane().setLayout(null);
+
+		Object data[][] = {};
+		String col[] = { "Serial No", "MAC Address", "Client IP", "Status" };
+		table = new JTable();
+		tableModel = new DefaultTableModel(data, col)
+		{
+			@Override
+			public boolean isCellEditable(int row, int column)
+			{
+				return false;
+			}
+		};
+		
+		table.setModel(tableModel);
+		table.setBounds(2, 2, 970, 510);
+
+		JScrollPane sp = new JScrollPane(table);
+		sp.setBounds(10, 87, 974, 517);
+		sp.setBorder(new LineBorder(Color.BLACK, 2, true));
+		window.getContentPane().add(sp);
+		sp.setVisible(true);
+
+		JButton btnShowDatabase = new JButton("Show Database");
+		btnShowDatabase.setFont(new Font("Dialog", Font.BOLD, 13));
+		btnShowDatabase.setBounds(12, 615, 150, 40);
+		window.getContentPane().add(btnShowDatabase);
+
+		btnShowDatabase.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				if(running == true)
+				{
+					m.sd = new ShowDatabase(m);
+				}
+			}
+		});
+		
+		JButton btnStartServer = new JButton("Start Server");
+		window.getContentPane().setBackground(Color.RED);
+		btnStartServer.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				if (btnStartServer.getText().equals("Start Server"))
+				{
+					// init goes here
+					running = true;
+					api = new API();
+					api.start();
+					System.out.println("Server Started");
+					btnShowDatabase.setEnabled(false);
+					btnStartServer.setText("Stop Server");
+					window.getContentPane().setBackground(new Color(102, 153, 255));
+					window.repaint();
+				} else
+				{
+					running = false;
+					btnShowDatabase.setEnabled(true);
+					api.stopServer();
+					System.out.println("Server Stopped");
+					// stop server code goes here.
+					btnStartServer.setText("Start Server");
+					window.getContentPane().setBackground(Color.RED);
+					window.repaint();
+				}
+			}
+		});
+		btnStartServer.setFont(new Font("Dialog", Font.BOLD, 18));
+		btnStartServer.setBounds(822, 25, 159, 46);
+		window.getContentPane().add(btnStartServer);
+
+		JLabel lblProtectionServer = new JLabel("Protection Server");
+		lblProtectionServer.setFont(new Font("Manjari Regular", Font.BOLD, 40));
+		lblProtectionServer.setForeground(Color.WHITE);
+		lblProtectionServer.setBounds(130, 18, 451, 57);
+		window.getContentPane().add(lblProtectionServer);
+
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(Server.class.getResource("/Images/servericon.png")));
+		label.setBounds(18, 5, 100, 75);
+		window.getContentPane().add(label);
+
+		JButton btnExit = new JButton("Exit");
+		btnExit.setFont(new Font("Dialog", Font.BOLD, 14));
+		btnExit.setBounds(832, 615, 150, 40);
+		window.getContentPane().add(btnExit);
+		btnExit.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				window.dispose();
+			}
+		});
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setVisible(true);
+	}
+	public void insertTable(String mac, String ip, String status)
+	{
+		serial++;
+		Object[] rowData = {serial, mac, ip, status};
+		tableModel.addRow(rowData);
+	}
+	public static void main(String args[])
+	{
+		Server s = new Server();
+	}
+}
