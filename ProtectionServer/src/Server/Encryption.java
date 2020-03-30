@@ -193,15 +193,4 @@ class Encryption
 			return false;
 		}
 	}	
-//	public static void main(String args[])
-//	{
-//		Scanner input = new Scanner(System.in);
-//		Encryption e = new Encryption();
-//		Decryption d = new Decryption();
-//		System.out.println("Enter the text : ");
-//		String enc = e.encrypt(input.nextLine());
-//		System.out.println("After encryption : "+enc);
-//		String dec = d.decrypt(enc);
-//		System.out.println("After Decryption : "+dec);
-//	}
 }

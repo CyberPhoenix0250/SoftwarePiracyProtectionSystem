@@ -42,7 +42,6 @@ class RequestHandler extends Thread
 		try
 		{
 			String key = "";
-			String d = "";
 			String text = input.readUTF();
 			String arr[] = text.split("@");
 			String reply = "";
@@ -61,15 +60,14 @@ class RequestHandler extends Thread
 				key = db.getKey(md5);
 				if(!db.isMacAssociated(md5))
 				{
-					d = date.toGMTString();
-					if(db.updateCredentials(key, mac, fname, lname, d))
+					if(db.updateCredentials(key, mac, fname, lname, date.toGMTString()))
 					{
-						reply = ac.getAccessCode(key, mac);
+						//reply = ac.getAccessCode(key, mac);
 					}
 				}
 				else
 				{
-					reply = ac.getAccessCode(key, mac);
+					//reply = ac.getAccessCode(key, mac);
 				}
 			}
 			else

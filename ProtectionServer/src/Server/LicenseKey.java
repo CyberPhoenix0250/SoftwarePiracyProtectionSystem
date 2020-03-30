@@ -110,22 +110,4 @@ class LicenseKey
 	{
 		return license.equals(k.license);
 	}
-	public static void main(String args[])
-	{
-		LicenseKey l;
-		Scanner input = new Scanner(System.in);
-		System.out.println("Enter the Text : ");
-		String key = input.nextLine();
-		System.out.println("Text length : "+key.length());
-		l = new LicenseKey(key);
-		System.out.println("Is a Valid Key : ? : "+l.isValid());
-		System.out.println("Key is : "+l.getKey());
-		System.out.print("The keycode is : ");
-		int num[] = l.getInsideCode();
-		for(int i = 0 ; i < num.length ; i++)
-		{
-			System.out.print(num[i]);
-		}
-		input.close();
-	}
 }
