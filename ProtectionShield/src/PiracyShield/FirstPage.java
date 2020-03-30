@@ -43,7 +43,7 @@ class FirstPage
 				window.dispose();
 			}
 		});
-		CancelBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		CancelBtn.setFont(new Font("Alice", Font.PLAIN, 18));
 		CancelBtn.setBounds(579, 410, 95, 27);
 		window.getContentPane().add(CancelBtn);
 
@@ -59,7 +59,7 @@ class FirstPage
 				new SecondPage(memory);
 			}
 		});
-		btnNext.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnNext.setFont(new Font("Alice", Font.PLAIN, 18));
 		btnNext.setBounds(474, 410, 95, 27);
 		window.getContentPane().add(btnNext);
 
@@ -69,7 +69,7 @@ class FirstPage
 		window.getContentPane().add(separator_1);
 
 		JLabel LeftHeader = new JLabel("Piracy Shield");
-		LeftHeader.setFont(new Font("ROG Fonts", Font.PLAIN, 20));
+		LeftHeader.setFont(new Font("Alice", Font.PLAIN, 20));
 		LeftHeader.setBounds(10, 10, 213, 45);
 		window.getContentPane().add(LeftHeader);
 
@@ -80,13 +80,13 @@ class FirstPage
 
 		JTextPane txtpnWelcomeToThe = new JTextPane();
 		txtpnWelcomeToThe.setEditable(false);
-		txtpnWelcomeToThe.setFont(new Font("Tahoma", Font.BOLD, 16));
+		txtpnWelcomeToThe.setFont(new Font("Alice", Font.BOLD, 16));
 		txtpnWelcomeToThe.setText("Welcome to the PiracyShield Wizard for \r\nSerial number Validation and Online Activation.");
 		txtpnWelcomeToThe.setBounds(256, 31, 403, 63);
 		window.getContentPane().add(txtpnWelcomeToThe);
 
 		JTextPane txtpnThePiracyshieldWizard = new JTextPane();
-		txtpnThePiracyshieldWizard.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtpnThePiracyshieldWizard.setFont(new Font("Alice", Font.PLAIN, 15));
 		txtpnThePiracyshieldWizard.setText(
 				"The PiracyShield Wizard will Register and Install the Client Software Application on your machine, please make sure that the machine is connected to the internet.\r\n\r\nTo Continue, Click Next");
 		txtpnThePiracyshieldWizard.setBounds(256, 120, 403, 107);
@@ -108,7 +108,7 @@ class FirstPage
 				}
 			}
 		});
-		logButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		logButton.setFont(new Font("Alice", Font.PLAIN, 18));
 		logButton.setBounds(10, 409, 95, 27);
 		window.getContentPane().add(logButton);
 		window.setVisible(true);

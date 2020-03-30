@@ -65,7 +65,7 @@ class FourthPage
 
 			}
 		});
-		btnCancel.setFont(new Font("Dialog", Font.PLAIN, 14));
+		btnCancel.setFont(new Font("Alice", Font.PLAIN, 14));
 		btnCancel.setBounds(572, 417, 95, 27);
 		window.getContentPane().add(btnCancel);
 
@@ -79,7 +79,7 @@ class FourthPage
 
 			}
 		});
-		btnNext.setFont(new Font("Dialog", Font.PLAIN, 14));
+		btnNext.setFont(new Font("Alice", Font.PLAIN, 14));
 		btnNext.setBounds(460, 417, 95, 27);
 		window.getContentPane().add(btnNext);
 
@@ -95,27 +95,27 @@ class FourthPage
 				new ThirdPage(memory);
 			}
 		});
-		button_1.setFont(new Font("Dialog", Font.PLAIN, 14));
+		button_1.setFont(new Font("Alice", Font.PLAIN, 14));
 		button_1.setBounds(348, 417, 95, 27);
 		window.getContentPane().add(button_1);
 
 		JLabel lblNewLabel = new JLabel("Product Registration");
-		lblNewLabel.setFont(new Font("Dialog", Font.PLAIN, 26));
+		lblNewLabel.setFont(new Font("Alice", Font.PLAIN, 26));
 		lblNewLabel.setBounds(10, 10, 572, 34);
 		window.getContentPane().add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("Enter your information to register the product.");
-		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 18));
+		lblNewLabel_1.setFont(new Font("Alice", Font.PLAIN, 18));
 		lblNewLabel_1.setBounds(10, 42, 572, 34);
 		window.getContentPane().add(lblNewLabel_1);
 
 		JLabel lblNewLabel_3 = new JLabel("First Name");
-		lblNewLabel_3.setFont(new Font("Dialog", Font.PLAIN, 18));
+		lblNewLabel_3.setFont(new Font("Alice", Font.PLAIN, 18));
 		lblNewLabel_3.setBounds(30, 122, 115, 24);
 		window.getContentPane().add(lblNewLabel_3);
 
 		JLabel lblLastName = new JLabel("Last Name");
-		lblLastName.setFont(new Font("Dialog", Font.PLAIN, 18));
+		lblLastName.setFont(new Font("Alice", Font.PLAIN, 18));
 		lblLastName.setBounds(348, 122, 115, 24);
 		window.getContentPane().add(lblLastName);
 
@@ -130,7 +130,7 @@ class FourthPage
 		window.getContentPane().add(lnameField);
 
 		JLabel lblKey = new JLabel("License Key");
-		lblKey.setFont(new Font("Dialog", Font.PLAIN, 18));
+		lblKey.setFont(new Font("Alice", Font.PLAIN, 18));
 		lblKey.setBounds(30, 180, 115, 24);
 		window.getContentPane().add(lblKey);
 
@@ -141,19 +141,19 @@ class FourthPage
 		keylabel.setBackground(Color.WHITE);
 		keylabel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		keylabel.setBounds(143, 180, 506, 26);
-		keylabel.setFont(new Font("Cambria", Font.PLAIN, 20));
+		keylabel.setFont(new Font("Alice", Font.PLAIN, 20));
 		keylabel.setHorizontalAlignment(JLabel.CENTER);
 		license = license.toUpperCase();
 		keylabel.setText(lk.getKey());
 		window.getContentPane().add(keylabel);
 
 		JLabel lblIpAddress = new JLabel("IP Address");
-		lblIpAddress.setFont(new Font("Dialog", Font.PLAIN, 18));
+		lblIpAddress.setFont(new Font("Alice", Font.PLAIN, 18));
 		lblIpAddress.setBounds(30, 235, 115, 24);
 		window.getContentPane().add(lblIpAddress);
 
 		JLabel lblMacAddress = new JLabel("MAC");
-		lblMacAddress.setFont(new Font("Dialog", Font.PLAIN, 18));
+		lblMacAddress.setFont(new Font("Alice", Font.PLAIN, 18));
 		lblMacAddress.setBounds(30, 286, 115, 24);
 		window.getContentPane().add(lblMacAddress);
 
@@ -163,7 +163,7 @@ class FourthPage
 		label.setBounds(143, 233, 506, 26);
 		label.setText(m.getIP());
 		label.setHorizontalAlignment(JLabel.CENTER);
-		label.setFont(new Font("Cambria", Font.PLAIN, 20));
+		label.setFont(new Font("Alice", Font.PLAIN, 20));
 		window.getContentPane().add(label);
 
 		JLabel label_1 = new JLabel("");
@@ -172,7 +172,7 @@ class FourthPage
 		label_1.setBounds(143, 284, 506, 26);
 		label_1.setText(m.getMAC());
 		label_1.setHorizontalAlignment(JLabel.CENTER);
-		label_1.setFont(new Font("Cambria", Font.PLAIN, 20));
+		label_1.setFont(new Font("Alice", Font.PLAIN, 20));
 		window.getContentPane().add(label_1);
 
 		JButton btnRegister = new JButton("Register");
@@ -191,19 +191,19 @@ class FourthPage
 				}
 			}
 		});
-		btnRegister.setFont(new Font("Dialog", Font.PLAIN, 14));
+		btnRegister.setFont(new Font("Alice", Font.PLAIN, 14));
 		btnRegister.setBounds(554, 340, 95, 27);
 		window.getContentPane().add(btnRegister);
 		
 		JLabel lblDate = new JLabel("Date");
-		lblDate.setFont(new Font("Dialog", Font.PLAIN, 18));
+		lblDate.setFont(new Font("Alice", Font.PLAIN, 18));
 		lblDate.setBounds(30, 341, 115, 24);
 		window.getContentPane().add(lblDate);
 		
 	    Date date = new Date();
 		JLabel label_2 = new JLabel("");
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setFont(new Font("Dialog", Font.PLAIN, 20));
+		label_2.setFont(new Font("Alice", Font.PLAIN, 20));
 		label_2.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		label_2.setBackground(Color.WHITE);
 		label_2.setBounds(143, 339, 376, 26);

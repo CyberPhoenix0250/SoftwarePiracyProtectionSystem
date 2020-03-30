@@ -58,7 +58,7 @@ class ShowDatabase
 		}
 
 		JLabel lblListOfAll = new JLabel("List of all License keys present in the database.");
-		lblListOfAll.setFont(new Font("Manjari Bold", Font.PLAIN, 22));
+		lblListOfAll.setFont(new Font("Alice", Font.PLAIN, 22));
 		lblListOfAll.setBounds(22, 12, 759, 34);
 		window.getContentPane().add(lblListOfAll);
 
@@ -71,7 +71,7 @@ class ShowDatabase
 				window.dispose();
 			}
 		});
-		btnBack.setFont(new Font("Ubuntu", Font.BOLD, 23));
+		btnBack.setFont(new Font("Alice", Font.BOLD, 23));
 		btnBack.setBounds(12, 607, 114, 36);
 		window.getContentPane().add(btnBack);
 
@@ -84,7 +84,7 @@ class ShowDatabase
 				new AddKey(m);
 			}
 		});
-		btnAddLicenseKey.setFont(new Font("Ubuntu", Font.BOLD, 23));
+		btnAddLicenseKey.setFont(new Font("Alice", Font.BOLD, 23));
 		btnAddLicenseKey.setBounds(632, 607, 170, 36);
 		window.getContentPane().add(btnAddLicenseKey);
 
@@ -97,12 +97,12 @@ class ShowDatabase
 				new RemoveKey(m);
 			}
 		});
-		btnRemoveLicenseKey.setFont(new Font("Ubuntu", Font.BOLD, 23));
+		btnRemoveLicenseKey.setFont(new Font("Alice", Font.BOLD, 23));
 		btnRemoveLicenseKey.setBounds(814, 607, 170, 36);
 		window.getContentPane().add(btnRemoveLicenseKey);
 
 		textField = new JTextField();
-		textField.setFont(new Font("Courier 10 Pitch", Font.BOLD, 26));
+		textField.setFont(new Font("Alice", Font.BOLD, 26));
 		textField.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		textField.setBounds(165, 58, 637, 34);
 		textField.addCaretListener(new CaretListener()
@@ -118,7 +118,7 @@ class ShowDatabase
 		window.getContentPane().add(textField);
 
 		JLabel lblSearch = new JLabel("Search String");
-		lblSearch.setFont(new Font("Ubuntu", Font.BOLD, 20));
+		lblSearch.setFont(new Font("Alice", Font.BOLD, 20));
 		lblSearch.setBounds(22, 58, 147, 35);
 		window.getContentPane().add(lblSearch);
 
@@ -131,7 +131,7 @@ class ShowDatabase
 				init();
 			}
 		});
-		btnRefresh.setFont(new Font("Ubuntu", Font.BOLD, 23));
+		btnRefresh.setFont(new Font("Alice", Font.BOLD, 23));
 		btnRefresh.setBounds(814, 56, 170, 36);
 		window.getContentPane().add(btnRefresh);
 		window.setIconImage(Toolkit.getDefaultToolkit().getImage(ShowDatabase.class.getResource("/Images/shield.png")));

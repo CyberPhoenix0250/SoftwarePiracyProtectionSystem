@@ -35,12 +35,12 @@ class SecondPage
 		window.getContentPane().add(separator_1);
 
 		JLabel lblNewLabel = new JLabel("License Agreement");
-		lblNewLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		lblNewLabel.setFont(new Font("Alice", Font.BOLD, 20));
 		lblNewLabel.setBounds(10, 10, 224, 27);
 		window.getContentPane().add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("Please read the license agreement carefully.");
-		lblNewLabel_1.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		lblNewLabel_1.setFont(new Font("Alice", Font.PLAIN, 16));
 		lblNewLabel_1.setBounds(10, 47, 386, 27);
 		window.getContentPane().add(lblNewLabel_1);
 
@@ -76,7 +76,7 @@ class SecondPage
 				}
 			}
 		});
-		btnNext.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnNext.setFont(new Font("Alice", Font.PLAIN, 14));
 		btnNext.setBounds(474, 410, 95, 27);
 		btnNext.setEnabled(false);
 		window.getContentPane().add(btnNext);
@@ -89,7 +89,7 @@ class SecondPage
 				btnNext.setEnabled(true);
 			}
 		});
-		radioYes.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		radioYes.setFont(new Font("Alice", Font.PLAIN, 16));
 		radioYes.setBackground(Color.WHITE);
 		radioYes.setBounds(22, 332, 640, 21);
 		window.getContentPane().add(radioYes);
@@ -108,7 +108,7 @@ class SecondPage
 			}
 		});
 
-		radioNo.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		radioNo.setFont(new Font("Alice", Font.PLAIN, 16));
 		radioNo.setBackground(Color.WHITE);
 		radioNo.setBounds(22, 355, 640, 21);
 		window.getContentPane().add(radioNo);
@@ -129,7 +129,7 @@ class SecondPage
 				window.dispose();
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnNewButton.setFont(new Font("Alice", Font.PLAIN, 14));
 		btnNewButton.setBounds(579, 410, 95, 27);
 		window.getContentPane().add(btnNewButton);
 
@@ -147,7 +147,7 @@ class SecondPage
 				new FirstPage(memory);
 			}
 		});
-		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnBack.setFont(new Font("Alice", Font.PLAIN, 14));
 		btnBack.setBounds(369, 410, 95, 27);
 		window.getContentPane().add(btnBack);
 

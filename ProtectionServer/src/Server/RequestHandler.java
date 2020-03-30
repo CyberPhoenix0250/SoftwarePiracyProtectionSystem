@@ -62,12 +62,12 @@ class RequestHandler extends Thread
 				{
 					if(db.updateCredentials(key, mac, fname, lname, date.toGMTString()))
 					{
-						//reply = ac.getAccessCode(key, mac);
+						reply = ac.getAccessCode(key, mac);
 					}
 				}
 				else
 				{
-					//reply = ac.getAccessCode(key, mac);
+					reply = ac.getAccessCode(key, mac);
 				}
 			}
 			else

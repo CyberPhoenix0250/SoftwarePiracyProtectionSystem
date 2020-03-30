@@ -44,12 +44,12 @@ class AddKey
 		JLabel status = new JLabel("");
 		status.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		status.setHorizontalAlignment(SwingConstants.CENTER);
-		status.setFont(new Font("Manjari Bold", Font.BOLD, 24));
+		status.setFont(new Font("Alice", Font.BOLD, 24));
 		status.setBounds(132, 173, 235, 38);
 		window.getContentPane().add(status);
 
 		JLabel lblInsertANew = new JLabel("Insert a New License Key into the Database");
-		lblInsertANew.setFont(new Font("Manjari Regular", Font.PLAIN, 20));
+		lblInsertANew.setFont(new Font("Alice", Font.PLAIN, 20));
 		lblInsertANew.setBounds(47, 24, 405, 22);
 		window.getContentPane().add(lblInsertANew);
 
@@ -61,13 +61,13 @@ class AddKey
 		textField.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		textField.setEditable(false);
 		textField.setHorizontalAlignment(JTextField.CENTER);
-		textField.setFont(new Font("Ubuntu", Font.BOLD, 20));
+		textField.setFont(new Font("Alice", Font.BOLD, 20));
 		textField.setBounds(47, 65, 405, 30);
 		window.getContentPane().add(textField);
 		textField.setColumns(10);
 
 		JButton btnGenerateKey = new JButton("Generate Key");
-		btnGenerateKey.setFont(new Font("Manjari Regular", Font.BOLD, 20));
+		btnGenerateKey.setFont(new Font("Alice", Font.BOLD, 20));
 		btnGenerateKey.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
@@ -99,7 +99,7 @@ class AddKey
 				}
 			}
 		});
-		btnInsert.setFont(new Font("Manjari Regular", Font.BOLD, 20));
+		btnInsert.setFont(new Font("Alice", Font.BOLD, 20));
 		btnInsert.setBounds(288, 118, 164, 38);
 		window.getContentPane().add(btnInsert);
 
@@ -113,7 +113,7 @@ class AddKey
 				window.dispose();
 			}
 		});
-		btnExit.setFont(new Font("Manjari Regular", Font.BOLD, 20));
+		btnExit.setFont(new Font("Alice", Font.BOLD, 20));
 		btnExit.setBounds(200, 223, 100, 38);
 		window.getContentPane().add(btnExit);
 

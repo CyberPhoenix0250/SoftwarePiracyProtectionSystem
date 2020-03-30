@@ -26,6 +26,7 @@ class Server
 	private API api;
 	public Server()
 	{
+		new FontSetup();
 		m = new Memory();
 		serial = 0;
 		running = true;
@@ -70,13 +71,14 @@ class Server
 		table.setBounds(2, 2, 970, 510);
 
 		JScrollPane sp = new JScrollPane(table);
+		sp.setFont(new Font("Alice", Font.PLAIN, 12));
 		sp.setBounds(10, 87, 974, 517);
 		sp.setBorder(new LineBorder(Color.BLACK, 2, true));
 		window.getContentPane().add(sp);
 		sp.setVisible(true);
 
 		JButton btnShowDatabase = new JButton("Show Database");
-		btnShowDatabase.setFont(new Font("Dialog", Font.BOLD, 13));
+		btnShowDatabase.setFont(new Font("Alice", Font.BOLD, 16));
 		btnShowDatabase.setBounds(12, 615, 150, 40);
 		window.getContentPane().add(btnShowDatabase);
 
@@ -123,12 +125,12 @@ class Server
 				}
 			}
 		});
-		btnStartServer.setFont(new Font("Dialog", Font.BOLD, 18));
+		btnStartServer.setFont(new Font("Alice", Font.BOLD, 22));
 		btnStartServer.setBounds(822, 25, 159, 46);
 		window.getContentPane().add(btnStartServer);
 
-		JLabel lblProtectionServer = new JLabel("Protection Server");
-		lblProtectionServer.setFont(new Font("Manjari Regular", Font.BOLD, 40));
+		JLabel lblProtectionServer = new JLabel("PROTECTION SERVER");
+		lblProtectionServer.setFont(new Font("Alice", Font.BOLD, 40));
 		lblProtectionServer.setForeground(Color.WHITE);
 		lblProtectionServer.setBounds(130, 18, 451, 57);
 		window.getContentPane().add(lblProtectionServer);
@@ -139,7 +141,7 @@ class Server
 		window.getContentPane().add(label);
 
 		JButton btnExit = new JButton("Exit");
-		btnExit.setFont(new Font("Dialog", Font.BOLD, 14));
+		btnExit.setFont(new Font("Alice", Font.BOLD, 16));
 		btnExit.setBounds(832, 615, 150, 40);
 		window.getContentPane().add(btnExit);
 		btnExit.addMouseListener(new MouseAdapter()

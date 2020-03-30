@@ -44,14 +44,14 @@ class RemoveKey
 		keygen = new KeyGenerator();
 
 		JLabel label = new JLabel("");
-		label.setFont(new Font("Courier 10 Pitch", Font.BOLD, 20));
+		label.setFont(new Font("Alice", Font.BOLD, 20));
 		label.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		label.setBounds(35, 106, 430, 35);
 		label.setHorizontalAlignment(JLabel.CENTER);
 		window.getContentPane().add(label);
 
 		JLabel lblSelectTheLicense = new JLabel("Select the License Key to remove from the Database");
-		lblSelectTheLicense.setFont(new Font("Ubuntu", Font.PLAIN, 20));
+		lblSelectTheLicense.setFont(new Font("Alice", Font.PLAIN, 20));
 		lblSelectTheLicense.setBounds(12, 12, 476, 35);
 		window.getContentPane().add(lblSelectTheLicense);
 
@@ -70,7 +70,7 @@ class RemoveKey
 		});
 		comboBox.setEditable(true);
 		comboBox.setForeground(Color.BLACK);
-		comboBox.setFont(new Font("Ubuntu", Font.BOLD, 17));
+		comboBox.setFont(new Font("Alice", Font.BOLD, 17));
 		comboBox.setBackground(Color.WHITE);
 		comboBox.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		comboBox.setBounds(375, 59, 90, 35);
@@ -82,7 +82,7 @@ class RemoveKey
 		status.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		status.setBounds(35, 200, 281, 35);
 		status.setHorizontalAlignment(JLabel.CENTER);
-		status.setFont(new Font("Ubuntu", Font.BOLD, 20));
+		status.setFont(new Font("Alice", Font.BOLD, 20));
 		window.getContentPane().add(status);
 
 		JButton btnNewButton = new JButton("Remove");
@@ -109,7 +109,7 @@ class RemoveKey
 				}
 			}
 		});
-		btnNewButton.setFont(new Font("Ubuntu", Font.BOLD, 16));
+		btnNewButton.setFont(new Font("Alice", Font.BOLD, 16));
 		btnNewButton.setBounds(199, 153, 114, 35);
 		window.getContentPane().add(btnNewButton);
 
@@ -123,12 +123,12 @@ class RemoveKey
 				window.dispose();
 			}
 		});
-		btnExit.setFont(new Font("Ubuntu", Font.BOLD, 16));
+		btnExit.setFont(new Font("Alice", Font.BOLD, 16));
 		btnExit.setBounds(351, 200, 114, 35);
 		window.getContentPane().add(btnExit);
 
 		JLabel lblSelectTheIndex = new JLabel("Select the index of the license key.");
-		lblSelectTheIndex.setFont(new Font("Ubuntu", Font.PLAIN, 18));
+		lblSelectTheIndex.setFont(new Font("Alice", Font.PLAIN, 18));
 		lblSelectTheIndex.setBounds(35, 59, 331, 35);
 		window.getContentPane().add(lblSelectTheIndex);
 		window.setVisible(true);
