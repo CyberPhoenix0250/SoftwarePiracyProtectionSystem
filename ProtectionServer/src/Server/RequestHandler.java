@@ -43,12 +43,13 @@ class RequestHandler extends Thread
 	@SuppressWarnings("deprecation")
 	public void getRequest()
 	{
+		String reply = "";
 		try
 		{
 			String key = "";
 			String text = input.readUTF();
 			String arr[] = text.split("@");
-			String reply = "";
+			
 			md5 = arr[0];
 			mac = arr[1];
 			fname = arr[2];
@@ -64,6 +65,7 @@ class RequestHandler extends Thread
 						reply = ac.getAccessCode(key, mac);
 						System.out.println("Server replying with : "+reply);
 						memory.s.insertTable(key, clientIP, "Genuine/Registered");
+						output.writeUTF(reply);
 					}
 				}
 				else
@@ -71,6 +73,7 @@ class RequestHandler extends Thread
 					reply = ac.getAccessCode(key, mac);
 					System.out.println("Server replying with : "+reply);
 					memory.s.insertTable(key, clientIP, "Fake/Type A");
+					output.writeUTF(reply);
 				}
 			}
 			else
@@ -78,12 +81,12 @@ class RequestHandler extends Thread
 				reply = "AccessDenied";
 				System.out.println("Server replying with : "+reply);
 				memory.s.insertTable(key, clientIP, "Fake/Type B");
+				output.writeUTF(reply);
 			}
-			output.writeUTF(reply);
+			
 		} catch (IOException e)
 		{
 			e.printStackTrace();
 		}
-		
 	}
 }

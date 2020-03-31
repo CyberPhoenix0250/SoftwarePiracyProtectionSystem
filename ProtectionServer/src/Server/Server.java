@@ -17,17 +17,17 @@ import java.awt.event.MouseEvent;
 
 class Server
 {
+	private static Memory m;
 	private JFrame window;
 	private JTable table;
 	private DefaultTableModel tableModel;
 	private int serial;
-	private Memory m;
 	private boolean running;
 	private API api;
 	public Server()
 	{
 		new FontSetup();
-		m = new Memory();
+		
 		serial = 0;
 		running = false;
 		
@@ -162,6 +162,7 @@ class Server
 	}
 	public static void main(String args[])
 	{
-		Server s = new Server();
+		m = new Memory();
+		m.s = new Server();
 	}
 }
