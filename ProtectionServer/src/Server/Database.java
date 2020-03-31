@@ -102,9 +102,7 @@ class Database
 			statement.execute("INSERT INTO LicenseTable(LICENSE,MD5) VALUES('" + key + "','" + md5 + "');");
 		} catch (SQLException e)
 		{
-			e.printStackTrace();
-			JOptionPane.showConfirmDialog(null, "Unable to insert the License Key", "Error", JOptionPane.ERROR_MESSAGE);
-			System.out.println("returning false 1");
+			JOptionPane.showConfirmDialog(null, "License Key is Already Present", "Duplicate Entry Error", JOptionPane.CLOSED_OPTION);
 			return false;
 		}
 		return true;
@@ -246,11 +244,12 @@ class Database
 
 		try
 		{
-			result = statement.executeQuery("UPDATE LicenseTable SET MAC = '" + mac + "', FNAME = '" + fname
+			isTrue = statement.execute("UPDATE LicenseTable SET MAC = '" + mac + "', FNAME = '" + fname
 					+ "', LNAME = '" + lname + "', REGDATE = '" + regdate + "' WHERE LICENSE = '" + license + "';");
 			isTrue = true;
 		} catch (SQLException e)
 		{
+			e.printStackTrace();
 			isTrue = false;
 		}
 		return isTrue;

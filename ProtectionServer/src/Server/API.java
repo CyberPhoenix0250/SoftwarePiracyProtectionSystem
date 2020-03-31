@@ -9,8 +9,10 @@ class API extends Thread
 	private ServerSocket server;
 	private Socket socket;
 	private boolean running;
-	public API()
+	private Memory m;
+	public API(Memory mem)
 	{
+		m = mem;
 		running = true;
 	}
 	public void run()
@@ -27,7 +29,7 @@ class API extends Thread
 				socket = null;
 				socket = server.accept();
 				System.out.println("New Client Connected : "+socket.getInetAddress().toString()+" Port "+socket.getPort());
-				new RequestHandler(socket).start();
+				new RequestHandler(socket,m).start();
 			}
 		} catch (Exception e)
 		{}

@@ -17,13 +17,17 @@ class RequestHandler extends Thread
 	private String mac;
 	private String fname;
 	private String lname;
+	private String clientIP;
 	private Date date;
-	public RequestHandler(Socket s)
+	private Memory memory;
+	public RequestHandler(Socket s, Memory m)
 	{
+		memory = m;
 		date = new Date();
 		db = new Database();
 		ac = new AccessCode();
-		System.out.println("Request handler is running");
+		//System.out.println("Request handler is running");
+		clientIP = s.getInetAddress().toString().substring(1);
 		socket = s;
 		try
 		{
@@ -50,11 +54,6 @@ class RequestHandler extends Thread
 			fname = arr[2];
 			lname = arr[3];
 			//
-			System.out.println("MD5 = "+md5);
-			System.out.println("MAC = "+mac);
-			System.out.println("First Name = "+fname);
-			System.out.println("Last Name = "+lname);
-			//
 			if(db.isKeyPresent(md5))
 			{
 				key = db.getKey(md5);
@@ -63,16 +62,22 @@ class RequestHandler extends Thread
 					if(db.updateCredentials(key, mac, fname, lname, date.toGMTString()))
 					{
 						reply = ac.getAccessCode(key, mac);
+						System.out.println("Server replying with : "+reply);
+						memory.s.insertTable(key, clientIP, "Genuine/Registered");
 					}
 				}
 				else
 				{
 					reply = ac.getAccessCode(key, mac);
+					System.out.println("Server replying with : "+reply);
+					memory.s.insertTable(key, clientIP, "Fake/Type A");
 				}
 			}
 			else
 			{
 				reply = "AccessDenied";
+				System.out.println("Server replying with : "+reply);
+				memory.s.insertTable(key, clientIP, "Fake/Type B");
 			}
 			output.writeUTF(reply);
 		} catch (IOException e)

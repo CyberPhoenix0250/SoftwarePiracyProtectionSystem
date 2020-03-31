@@ -29,7 +29,7 @@ class Server
 		new FontSetup();
 		m = new Memory();
 		serial = 0;
-		running = true;
+		running = false;
 		
 		try
 		{
@@ -87,7 +87,7 @@ class Server
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-				if(running == true)
+				if(!running)
 				{
 					m.sd = new ShowDatabase(m);
 				}
@@ -105,7 +105,7 @@ class Server
 				{
 					// init goes here
 					running = true;
-					api = new API();
+					api = new API(m);
 					api.start();
 					System.out.println("Server Started");
 					btnShowDatabase.setEnabled(false);
@@ -118,7 +118,6 @@ class Server
 					btnShowDatabase.setEnabled(true);
 					api.stopServer();
 					System.out.println("Server Stopped");
-					// stop server code goes here.
 					btnStartServer.setText("Start Server");
 					window.getContentPane().setBackground(Color.RED);
 					window.repaint();

@@ -8,6 +8,7 @@ class AccessCode
 	{
 		me = new MacEncrypt();
 		String code = me.getEncrypted(license, mac);
+		System.out.println("Code to return : "+code);
 		return code;
 	}
 }

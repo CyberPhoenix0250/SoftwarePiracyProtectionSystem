@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JSeparator;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.net.URL;
 import java.net.URLConnection;
 import javax.swing.JButton;
@@ -49,13 +50,13 @@ class ThirdPage
 		window.getContentPane().add(separator_1);
 
 		JLabel lblNewLabel = new JLabel("License Key Validation");
-		lblNewLabel.setFont(new Font("Alice", Font.BOLD, 20));
+		lblNewLabel.setFont(new Font("Alice", Font.BOLD, 24));
 		lblNewLabel.setBounds(10, 10, 459, 27);
 		window.getContentPane().add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("Enter your License Key to Register/Activate your product");
-		lblNewLabel_1.setFont(new Font("Alice", Font.PLAIN, 16));
-		lblNewLabel_1.setBounds(10, 47, 459, 27);
+		lblNewLabel_1.setFont(new Font("Alice", Font.PLAIN, 20));
+		lblNewLabel_1.setBounds(10, 47, 559, 27);
 		window.getContentPane().add(lblNewLabel_1);
 
 		JLabel lblNewLabel_2 = new JLabel("");
@@ -100,17 +101,17 @@ class ThirdPage
 				}
 			}
 		});
-		btnNewButton.setFont(new Font("Alice", Font.PLAIN, 16));
-		btnNewButton.setBounds(555, 176, 95, 27);
+		btnNewButton.setFont(new Font("Alice", Font.BOLD, 16));
+		btnNewButton.setBounds(555, 173, 95, 30);
 		window.getContentPane().add(btnNewButton);
 
 		JLabel lblNewLabel_4 = new JLabel("Piracy Shield will install SPPS client Application on your computer");
-		lblNewLabel_4.setFont(new Font("Alice", Font.PLAIN, 16));
+		lblNewLabel_4.setFont(new Font("Alice", Font.PLAIN, 18));
 		lblNewLabel_4.setBounds(20, 106, 622, 27);
 		window.getContentPane().add(lblNewLabel_4);
 
 		JLabel lblMakeSureThat = new JLabel("Make sure that your computer is connected to the internet");
-		lblMakeSureThat.setFont(new Font("Alice", Font.PLAIN, 16));
+		lblMakeSureThat.setFont(new Font("Alice", Font.PLAIN, 18));
 		lblMakeSureThat.setBounds(20, 134, 622, 27);
 		window.getContentPane().add(lblMakeSureThat);
 
@@ -140,7 +141,7 @@ class ThirdPage
 				}
 			}
 		});
-		btnNext.setFont(new Font("Alice", Font.PLAIN, 14));
+		btnNext.setFont(new Font("Alice", Font.BOLD, 16));
 		btnNext.setBounds(474, 410, 95, 27);
 		btnNext.setEnabled(false);
 		window.getContentPane().add(btnNext);
@@ -178,7 +179,7 @@ class ThirdPage
 		textField.setColumns(10);
 
 		JLabel lblPleaseEnterThe = new JLabel("Please enter the correct license key to continue");
-		lblPleaseEnterThe.setFont(new Font("Alice", Font.PLAIN, 16));
+		lblPleaseEnterThe.setFont(new Font("Alice", Font.PLAIN, 18));
 		lblPleaseEnterThe.setBounds(20, 306, 637, 19);
 		window.getContentPane().add(lblPleaseEnterThe);
 
@@ -193,7 +194,7 @@ class ThirdPage
 				window.dispose();
 			}
 		});
-		btnNewButton_1.setFont(new Font("Alice", Font.PLAIN, 14));
+		btnNewButton_1.setFont(new Font("Alice", Font.BOLD, 16));
 		btnNewButton_1.setBounds(579, 410, 95, 27);
 		window.getContentPane().add(btnNewButton_1);
 
@@ -211,7 +212,7 @@ class ThirdPage
 				new SecondPage(memory);
 			}
 		});
-		button_1.setFont(new Font("Alice", Font.PLAIN, 14));
+		button_1.setFont(new Font("Alice", Font.BOLD, 16));
 		button_1.setBounds(369, 410, 95, 27);
 		window.getContentPane().add(button_1);
 		window.setVisible(true);
