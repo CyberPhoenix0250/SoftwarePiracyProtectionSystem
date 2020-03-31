@@ -54,7 +54,7 @@ class RequestHandler extends Thread
 			mac = arr[1];
 			fname = arr[2];
 			lname = arr[3];
-			//
+
 			if(db.isKeyPresent(md5))
 			{
 				key = db.getKey(md5);
@@ -64,7 +64,7 @@ class RequestHandler extends Thread
 					{
 						reply = ac.getAccessCode(key, mac);
 						System.out.println("Server replying with : "+reply);
-						memory.s.insertTable(key, clientIP, "Genuine/Registered");
+						memory.s.insertTable(mac, clientIP, "Genuine/Registered");
 						output.writeUTF(reply);
 					}
 				}
@@ -72,7 +72,7 @@ class RequestHandler extends Thread
 				{
 					reply = ac.getAccessCode(key, mac);
 					System.out.println("Server replying with : "+reply);
-					memory.s.insertTable(key, clientIP, "Fake/Type A");
+					memory.s.insertTable(mac, clientIP, "Fake/Type A");
 					output.writeUTF(reply);
 				}
 			}
@@ -80,7 +80,7 @@ class RequestHandler extends Thread
 			{
 				reply = "AccessDenied";
 				System.out.println("Server replying with : "+reply);
-				memory.s.insertTable(key, clientIP, "Fake/Type B");
+				memory.s.insertTable(mac, clientIP, "Fake/Type B");
 				output.writeUTF(reply);
 			}
 			
