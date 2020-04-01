@@ -7,6 +7,8 @@ import javax.swing.JTable;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
@@ -48,9 +50,17 @@ class Server
 		} catch (Exception ignored)
 		{
 		}
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		Rectangle rect = ge.getMaximumWindowBounds();
 		window = new JFrame("Software Piracy Protection System");
 		window.getContentPane().setBackground(new Color(102, 153, 255));
-		window.setBounds(450, 50, 1000, 700);
+		int sl = rect.width;
+		int sb = rect.height;
+		int wl = 1000;
+		int wb = 700;
+		int x = ((sl/2)-(wl/2));
+		int y = ((sb/2)-(wb/2));
+		window.setBounds(x, y, wl, wb);
 		window.setResizable(false);
 		window.setIconImage(Toolkit.getDefaultToolkit().getImage(Server.class.getResource("/Images/shield.png")));
 		window.getContentPane().setLayout(null);

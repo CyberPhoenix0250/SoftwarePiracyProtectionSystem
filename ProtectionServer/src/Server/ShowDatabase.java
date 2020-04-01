@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.*;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
+
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
@@ -39,9 +42,18 @@ class ShowDatabase
 			// UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
 		} catch (Exception ignored)
 		{}
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		Rectangle rect = ge.getMaximumWindowBounds();
+		
 		window = new JFrame("License Key Database");
 		window.getContentPane().setBackground(new Color(230, 230, 250));
-		window.setBounds(450, 50, 1000, 700);
+		int sl = rect.width;
+		int sb = rect.height;
+		int wl = 1000;
+		int wb = 700;
+		int x = ((sl/2)-(wl/2));
+		int y = ((sb/2)-(wb/2));
+		window.setBounds(x, y, wl, wb);
 		window.setResizable(false);
 
 		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

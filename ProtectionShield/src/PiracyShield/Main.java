@@ -1,6 +1,8 @@
 package PiracyShield;
 
 import java.awt.Color;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import javax.swing.*;
 
@@ -23,6 +25,9 @@ class Main
 			//UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
 	    } catch(Exception ignored){}
 		
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		Rectangle rect = ge.getMaximumWindowBounds();
+		
 		JFrame window = new JFrame();
 		window.setTitle("Software Piracy Protection System");
 		window.getContentPane().setBackground(Color.WHITE);
@@ -30,7 +35,13 @@ class Main
 		window.setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/Images/shield.png")));
 		window.getContentPane().setLayout(null);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setBounds(420, 50, 700, 500);
+		int sl = rect.width;
+		int sb = rect.height;
+		int wl = 700;
+		int wb = 500;
+		int x = ((sl/2)-(wl/2));
+		int y = ((sb/2)-(wb/2));
+		window.setBounds(x, y, wl, wb);
 		Log log = new Log();
 		log.writeLog("Setup Started");
 			

@@ -5,6 +5,9 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -34,9 +37,19 @@ class AddKey
 		} catch (Exception ignored)
 		{
 		}
+		
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		Rectangle rect = ge.getMaximumWindowBounds();
+		
 		window = new JFrame("Add License Key");
 		window.setIconImage(Toolkit.getDefaultToolkit().getImage(ShowDatabase.class.getResource("/Images/shield.png")));
-		window.setBounds(700, 350, 500, 300);
+		int sl = rect.width;
+		int sb = rect.height;
+		int wl = 500;
+		int wb = 300;
+		int x = ((sl/2)-(wl/2));
+		int y = ((sb/2)-(wb/2));
+		window.setBounds(x, y, wl, wb);
 		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		window.setResizable(false);
 		window.getContentPane().setLayout(null);
