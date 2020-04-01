@@ -24,11 +24,12 @@ class ThirdPage
 	private JTextField textField;
 	private Log log;
 	private boolean isCorrect=false;
-
+	private Memory m;
 	public ThirdPage(Memory memory)
 	{
-		log = memory.log;
-		window = memory.window;
+		m = memory;
+		log = m.log;
+		window = m.window;
 		
 //		window = new JFrame();
 //		log = new Log();
@@ -134,10 +135,10 @@ class ThirdPage
 				log.writeLog("Next Page");
 				if(isCorrect)
 				{
-					memory.LicenseKey = textField.getText();
+					m.LicenseKey = textField.getText();
 					window.getContentPane().removeAll();
 					window.repaint();
-					new FourthPage(memory);
+					new FourthPage(m);
 				}
 			}
 		});
@@ -172,7 +173,7 @@ class ThirdPage
 		});
 		textField.setBorder(new LineBorder(Color.GRAY, 2 , true));
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setFont(new Font("Alice", Font.PLAIN, 20));
+		textField.setFont(new Font("Alice", Font.PLAIN, 26));
 		textField.setBackground(Color.WHITE);
 		textField.setBounds(20, 267, 510, 34);
 		window.getContentPane().add(textField);
@@ -209,7 +210,7 @@ class ThirdPage
 				log.writeLog("Back Page");
 				window.getContentPane().removeAll();
 				window.repaint();
-				new SecondPage(memory);
+				new SecondPage(m);
 			}
 		});
 		button_1.setFont(new Font("Alice", Font.BOLD, 16));

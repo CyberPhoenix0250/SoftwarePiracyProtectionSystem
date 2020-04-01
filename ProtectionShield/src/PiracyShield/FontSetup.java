@@ -14,6 +14,7 @@ class FontSetup
 		try {
 		     GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		     ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/Fonts/Alice-Regular.ttf")));
+		     ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/Fonts/Orbitron-Regular.ttf")));
 		} catch (IOException|FontFormatException e) {
 		     e.printStackTrace();
 		}

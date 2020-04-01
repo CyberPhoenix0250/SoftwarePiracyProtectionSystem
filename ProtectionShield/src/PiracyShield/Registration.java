@@ -31,9 +31,7 @@ class Registration
 			output = new DataOutputStream(s.getOutputStream());
 			input = new DataInputStream(s.getInputStream());
 			output.writeUTF(msg);
-			System.out.println("Message sent");
 			reply = input.readUTF();
-			System.out.println("Client Got the reply : "+reply);
 			s.close();
 		} catch (Exception e)
 		{

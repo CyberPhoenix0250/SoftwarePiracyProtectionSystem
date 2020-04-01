@@ -27,12 +27,19 @@ class FourthPage
 	private Log log;
 	private JFrame window;
 	private String license;
+	private Registration reg;
+	private boolean isRegistered;
+	private Memory m;
+	private HashFunction hf;
 	public FourthPage(Memory memory)
 	{
-		window = memory.window;
-		log = memory.log;
-		license = memory.LicenseKey;
-//		log = new Log();
+		m = memory;
+		window = m.window;
+		log = m.log;
+		license = m.LicenseKey;
+		log = new Log();
+		isRegistered = false;
+		hf = new HashFunction();
 //		JFrame window = new JFrame();
 //		window.setTitle("Software Piracy Protection System");
 //		window.getContentPane().setBackground(Color.WHITE);
@@ -62,10 +69,10 @@ class FourthPage
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-
+				window.dispose();
 			}
 		});
-		btnCancel.setFont(new Font("Alice", Font.PLAIN, 14));
+		btnCancel.setFont(new Font("Alice", Font.BOLD, 16));
 		btnCancel.setBounds(572, 417, 95, 27);
 		window.getContentPane().add(btnCancel);
 
@@ -76,10 +83,13 @@ class FourthPage
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-
+				if(isRegistered)
+				{
+					
+				}
 			}
 		});
-		btnNext.setFont(new Font("Alice", Font.PLAIN, 14));
+		btnNext.setFont(new Font("Alice", Font.BOLD, 16));
 		btnNext.setBounds(460, 417, 95, 27);
 		window.getContentPane().add(btnNext);
 
@@ -89,13 +99,12 @@ class FourthPage
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-				
 				window.getContentPane().removeAll();
 				window.repaint();
 				new ThirdPage(memory);
 			}
 		});
-		button_1.setFont(new Font("Alice", Font.PLAIN, 14));
+		button_1.setFont(new Font("Alice", Font.BOLD, 16));
 		button_1.setBounds(348, 417, 95, 27);
 		window.getContentPane().add(button_1);
 
@@ -120,11 +129,13 @@ class FourthPage
 		window.getContentPane().add(lblLastName);
 
 		fnameField = new JTextField();
+		fnameField.setFont(new Font("Orbitron", Font.PLAIN, 18));
 		fnameField.setBounds(143, 116, 193, 30);
 		window.getContentPane().add(fnameField);
 		fnameField.setColumns(10);
 
 		lnameField = new JTextField();
+		lnameField.setFont(new Font("Orbitron", Font.PLAIN, 18));
 		lnameField.setColumns(10);
 		lnameField.setBounds(456, 116, 193, 30);
 		window.getContentPane().add(lnameField);
@@ -135,13 +146,13 @@ class FourthPage
 		window.getContentPane().add(lblKey);
 
 		LicenseKey lk = new LicenseKey(license);
-		MAC m = new MAC();
+		MAC mac = new MAC();
 
 		JLabel keylabel = new JLabel("");
 		keylabel.setBackground(Color.WHITE);
 		keylabel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		keylabel.setBounds(143, 180, 506, 26);
-		keylabel.setFont(new Font("Alice", Font.PLAIN, 20));
+		keylabel.setFont(new Font("Orbitron", Font.PLAIN, 18));
 		keylabel.setHorizontalAlignment(JLabel.CENTER);
 		license = license.toUpperCase();
 		keylabel.setText(lk.getKey());
@@ -161,18 +172,19 @@ class FourthPage
 		label.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		label.setBackground(Color.WHITE);
 		label.setBounds(143, 233, 506, 26);
-		label.setText(m.getIP());
+		label.setText(mac.getIP());
 		label.setHorizontalAlignment(JLabel.CENTER);
-		label.setFont(new Font("Alice", Font.PLAIN, 20));
+		label.setFont(new Font("Orbitron", Font.PLAIN, 18));
 		window.getContentPane().add(label);
 
 		JLabel label_1 = new JLabel("");
 		label_1.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		label_1.setBackground(Color.WHITE);
 		label_1.setBounds(143, 284, 506, 26);
-		label_1.setText(m.getMAC());
+		m.MacAddress = mac.getMAC();
+		label_1.setText(mac.getMAC());
 		label_1.setHorizontalAlignment(JLabel.CENTER);
-		label_1.setFont(new Font("Alice", Font.PLAIN, 20));
+		label_1.setFont(new Font("Orbitron", Font.PLAIN, 18));
 		window.getContentPane().add(label_1);
 
 		JButton btnRegister = new JButton("Register");
@@ -183,7 +195,35 @@ class FourthPage
 			{
 				if(checkConnectivity())
 				{
-					//call to contact server.
+					if(!fnameField.getText().equals("") && !lnameField.getText().equals(""))
+					{
+						String hash,mac,fname,lname;
+						hash = hf.getMd5(license);
+						mac = m.MacAddress;
+						fname = fnameField.getText();
+						lname = lnameField.getText();
+						System.out.println("MD5 Sent : "+hash);
+						System.out.println("MAC Sent : "+mac);
+						System.out.println("Fname Sent : "+fname);
+						System.out.println("Lname Sent : "+lname);
+						reg = new Registration(hash, mac, fname, lname);
+						String code = reg.sendRequest();
+						if(!code.equals("AccessDenied"))
+						{
+							isRegistered = true;
+							btnNext.setEnabled(true);
+							JOptionPane.showMessageDialog(null, "Product Registration Successful\nAccess Code :"+code, "Registered", JOptionPane.INFORMATION_MESSAGE);
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(null, "Your Product cannot be Registered.\nPossible Reasons:\n1. Fake License Key\n2. Stolen License Key", "Registration Unsuccessful", JOptionPane.ERROR_MESSAGE);
+							isRegistered = false;
+						}
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Please enter first name and last name", "Empty Fields", JOptionPane.ERROR_MESSAGE);
+					}
 				}
 				else
 				{
@@ -191,7 +231,7 @@ class FourthPage
 				}
 			}
 		});
-		btnRegister.setFont(new Font("Alice", Font.PLAIN, 14));
+		btnRegister.setFont(new Font("Alice", Font.BOLD, 16));
 		btnRegister.setBounds(554, 340, 95, 27);
 		window.getContentPane().add(btnRegister);
 		
@@ -203,7 +243,7 @@ class FourthPage
 	    Date date = new Date();
 		JLabel label_2 = new JLabel("");
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setFont(new Font("Alice", Font.PLAIN, 20));
+		label_2.setFont(new Font("Orbitron", Font.PLAIN, 18));
 		label_2.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		label_2.setBackground(Color.WHITE);
 		label_2.setBounds(143, 339, 376, 26);
@@ -229,9 +269,5 @@ class FourthPage
 			isConnected = false;
 		}
 		return isConnected;
-	}
-	public static void main(String args[])
-	{
-		new FourthPage(new Memory());
 	}
 }
