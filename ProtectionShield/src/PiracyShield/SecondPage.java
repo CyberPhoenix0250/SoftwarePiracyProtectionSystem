@@ -71,6 +71,7 @@ class SecondPage
 			{
 				if(btnNext.isEnabled())
 				{
+					log.writeLog("Goto ThirdPage");
 					memory.radioSelection = 1;
 					window.getContentPane().removeAll();
 					window.repaint();
@@ -88,6 +89,7 @@ class SecondPage
 		{
 			public void itemStateChanged(ItemEvent e)
 			{
+				log.writeLog("user selected <I accept>");
 				btnNext.setEnabled(true);
 			}
 		});
@@ -106,6 +108,7 @@ class SecondPage
 		{
 			public void itemStateChanged(ItemEvent e)
 			{
+				log.writeLog("user selected <I do not accept>");
 				btnNext.setEnabled(false);
 			}
 		});
@@ -119,14 +122,13 @@ class SecondPage
 		bg.add(radioNo);
 		bg.add(radioYes);
 		
-		
-		
 		JButton btnNewButton = new JButton("Cancel");
 		btnNewButton.addMouseListener(new MouseAdapter()
 		{
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
+				log.writeLog("Cancelled the process.");
 				log.destroy();
 				window.dispose();
 			}
@@ -151,5 +153,4 @@ class SecondPage
 		btnBack.setBounds(369, 410, 95, 27);
 		window.getContentPane().add(btnBack);
 	}
-
 }

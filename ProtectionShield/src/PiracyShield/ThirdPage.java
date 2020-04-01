@@ -132,9 +132,10 @@ class ThirdPage
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-				log.writeLog("Next Page");
+				log.writeLog("");
 				if(isCorrect)
 				{
+					log.writeLog("Goto Fourth Page");
 					m.LicenseKey = textField.getText();
 					window.getContentPane().removeAll();
 					window.repaint();
@@ -147,8 +148,6 @@ class ThirdPage
 		btnNext.setEnabled(false);
 		window.getContentPane().add(btnNext);
 		
-		
-		
 		textField = new JTextField();
 		textField.addCaretListener(new CaretListener()
 		{
@@ -156,6 +155,7 @@ class ThirdPage
 			{
 				if(checkLicense())
 				{
+					log.writeLog("Entered license key is Valid");
 					isCorrect = true;
 					btnNext.setEnabled(true);
 					lstatus.setText("Valid Key");
@@ -163,6 +163,7 @@ class ThirdPage
 					lstatus.repaint();
 				}else
 				{
+					log.writeLog("Entered license key is not valid");
 					isCorrect = false;
 					btnNext.setEnabled(false);
 					lstatus.setText("Invalid Key");
@@ -220,6 +221,7 @@ class ThirdPage
 	}
 	private boolean checkLicense()
 	{
+		log.writeLog("Checking license key.");
 		String text = textField.getText();
 		if(text.length() <= 24)
 		{

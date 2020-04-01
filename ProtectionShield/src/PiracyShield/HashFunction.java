@@ -16,7 +16,7 @@ class HashFunction
 //		input.close();
 //	}
 
-	public static String getMd5(String input)
+	public String getMd5(String input)
 	{
 		try
 		{

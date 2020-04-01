@@ -2,7 +2,12 @@ package PiracyShield;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ConnectException;
 import java.net.Socket;
+import java.net.UnknownHostException;
+
+import javax.swing.JOptionPane;
 
 class Registration
 {
@@ -33,9 +38,17 @@ class Registration
 			output.writeUTF(msg);
 			reply = input.readUTF();
 			s.close();
-		} catch (Exception e)
+		} catch (ConnectException e)
 		{
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Server is Offline", "Offline Server", JOptionPane.ERROR_MESSAGE);
+		}
+		catch(UnknownHostException ue)
+		{
+			JOptionPane.showMessageDialog(null, "Unable to reach the destination", "Unknown Host", JOptionPane.ERROR_MESSAGE);
+		}
+		catch(IOException ioe)
+		{
+			JOptionPane.showMessageDialog(null, "Data Input/Output Stream error", "Input/Output Error", JOptionPane.ERROR_MESSAGE);
 		}
 		return reply;
 	}

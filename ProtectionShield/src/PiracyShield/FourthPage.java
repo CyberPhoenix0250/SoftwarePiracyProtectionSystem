@@ -69,6 +69,7 @@ class FourthPage
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
+				log.writeLog("Terminate Application");
 				window.dispose();
 			}
 		});
@@ -85,7 +86,7 @@ class FourthPage
 			{
 				if(isRegistered)
 				{
-					
+					log.writeLog("Registration successful");
 				}
 			}
 		});
@@ -99,6 +100,7 @@ class FourthPage
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
+				log.writeLog("Go back");
 				window.getContentPane().removeAll();
 				window.repaint();
 				new ThirdPage(memory);
@@ -193,8 +195,10 @@ class FourthPage
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
+				log.writeLog("Registration process Started");
 				if(checkConnectivity())
 				{
+					log.writeLog("Connected");
 					if(!fnameField.getText().equals("") && !lnameField.getText().equals(""))
 					{
 						String hash,mac,fname,lname;
@@ -222,11 +226,13 @@ class FourthPage
 					}
 					else
 					{
+						log.writeLog("Fields are empty");
 						JOptionPane.showMessageDialog(null, "Please enter first name and last name", "Empty Fields", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 				else
 				{
+					log.writeLog("No internet");
 					JOptionPane.showMessageDialog(null, "Your computer is not connected to the internet", "No Internet", JOptionPane.ERROR_MESSAGE);
 				}
 			}

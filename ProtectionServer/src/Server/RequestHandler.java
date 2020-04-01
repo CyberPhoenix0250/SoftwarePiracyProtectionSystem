@@ -26,7 +26,6 @@ class RequestHandler extends Thread
 		date = new Date();
 		db = new Database();
 		ac = new AccessCode();
-		//System.out.println("Request handler is running");
 		clientIP = s.getInetAddress().toString().substring(1);
 		socket = s;
 		try
@@ -35,7 +34,6 @@ class RequestHandler extends Thread
 			output = new DataOutputStream(socket.getOutputStream());
 		} catch (IOException e)
 		{
-			System.out.println("No Input/Output Source Found");
 			e.printStackTrace();
 		}
 		getRequest();
@@ -63,7 +61,6 @@ class RequestHandler extends Thread
 					if(db.updateCredentials(key, mac, fname, lname, date.toGMTString()))
 					{
 						reply = ac.getAccessCode(key, mac);
-						System.out.println("Server replying with : "+reply);
 						memory.s.insertTable(mac, clientIP, "Genuine/Registered");
 						output.writeUTF(reply);
 					}
@@ -71,7 +68,6 @@ class RequestHandler extends Thread
 				else
 				{
 					reply = ac.getAccessCode(key, mac);
-					System.out.println("Server replying with : "+reply);
 					memory.s.insertTable(mac, clientIP, "Fake/Type A");
 					output.writeUTF(reply);
 				}
@@ -79,7 +75,6 @@ class RequestHandler extends Thread
 			else
 			{
 				reply = "AccessDenied";
-				System.out.println("Server replying with : "+reply);
 				memory.s.insertTable(mac, clientIP, "Fake/Type B");
 				output.writeUTF(reply);
 			}

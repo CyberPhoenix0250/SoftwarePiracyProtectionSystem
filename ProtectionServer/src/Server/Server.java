@@ -107,7 +107,6 @@ class Server
 					running = true;
 					api = new API(m);
 					api.start();
-					System.out.println("Server Started");
 					btnShowDatabase.setEnabled(false);
 					btnStartServer.setText("Stop Server");
 					window.getContentPane().setBackground(new Color(102, 153, 255));
@@ -117,7 +116,6 @@ class Server
 					running = false;
 					btnShowDatabase.setEnabled(true);
 					api.stopServer();
-					System.out.println("Server Stopped");
 					btnStartServer.setText("Start Server");
 					window.getContentPane().setBackground(Color.RED);
 					window.repaint();

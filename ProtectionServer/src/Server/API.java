@@ -28,7 +28,7 @@ class API extends Thread
 			{
 				socket = null;
 				socket = server.accept();
-				System.out.println("New Client Connected : "+socket.getInetAddress().toString()+" Port "+socket.getPort());
+				//System.out.println("New Client Connected : "+socket.getInetAddress().toString()+" Port "+socket.getPort());
 				new RequestHandler(socket,m).start();
 			}
 		} catch (Exception e)
@@ -40,7 +40,7 @@ class API extends Thread
 		{
 			running = false;
 			server.close();
-			System.out.println("Server closed");
+			//System.out.println("Server closed");
 		} catch (IOException e)
 		{
 			e.printStackTrace();

@@ -54,7 +54,7 @@ class FirstPage
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-				log.writeLog("Next Page");
+				log.writeLog("Goto Next Page");
 				window.getContentPane().removeAll();
 				window.repaint();
 				new SecondPage(memory);
