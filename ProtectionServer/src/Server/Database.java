@@ -19,7 +19,7 @@ class Database
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/LicenseDatabase?serverTimezone=UTC", "root", "AdminRoot4!");
+					"jdbc:mysql://localhost:3306/LicenseDatabase?serverTimezone=UTC", "root", "root");
 			statement = conn.createStatement();
 		} catch (Exception e)
 		{
