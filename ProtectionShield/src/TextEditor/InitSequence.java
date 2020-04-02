@@ -108,8 +108,8 @@ class InitSequence extends JFrame
 		for(int i = 0 ; i < 200 ; i++)
 		{
 			g.drawLine(x1, 0, 600, y2);
-			x1=x1+2;
-			y2=y2-2;
+			x1=x1+5;
+			y2=y2-5;
 		}
 	}
 	public static void main(String args[])

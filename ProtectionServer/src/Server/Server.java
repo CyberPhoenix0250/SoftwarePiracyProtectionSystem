@@ -66,7 +66,7 @@ class Server
 		window.getContentPane().setLayout(null);
 
 		Object data[][] = {};
-		String col[] = { "Serial No", "MAC Address", "Client IP", "Status" };
+		String col[] = { "Serial No", "MAC Address", "License Key", "Status" };
 		table = new JTable();
 		tableModel = new DefaultTableModel(data, col)
 		{
@@ -162,10 +162,10 @@ class Server
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 	}
-	public void insertTable(String mac, String ip, String status)
+	public void insertTable(String mac, String key, String status)
 	{
 		serial++;
-		Object[] rowData = {serial, mac, ip, status};
+		Object[] rowData = {serial, mac, key, status};
 		tableModel.addRow(rowData);
 	}
 	public static void main(String args[])

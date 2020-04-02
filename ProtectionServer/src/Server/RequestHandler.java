@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Date;
 
-class RequestHandler extends Thread
-{
+class RequestHandler extends Thread {
 	private Database db;
 	private AccessCode ac;
 	private DataInputStream input;
@@ -17,70 +16,70 @@ class RequestHandler extends Thread
 	private String mac;
 	private String fname;
 	private String lname;
-	private String clientIP;
 	private Date date;
 	private Memory memory;
-	public RequestHandler(Socket s, Memory m)
-	{
+
+	public RequestHandler(Socket s, Memory m) {
 		memory = m;
 		date = new Date();
 		db = new Database();
 		ac = new AccessCode();
-		clientIP = s.getInetAddress().toString().substring(1);
 		socket = s;
-		try
-		{
+		try {
 			input = new DataInputStream(socket.getInputStream());
 			output = new DataOutputStream(socket.getOutputStream());
-		} catch (IOException e)
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		getRequest();
 	}
+
 	@SuppressWarnings("deprecation")
-	public void getRequest()
-	{
+	public void getRequest() {
 		String reply = "";
-		try
-		{
+		try {
 			String key = "";
 			String text = input.readUTF();
 			String arr[] = text.split("@");
-			
+
 			md5 = arr[0];
 			mac = arr[1];
 			fname = arr[2];
 			lname = arr[3];
 
-			if(db.isKeyPresent(md5))
-			{
+			if (db.isKeyPresent(md5)) {
 				key = db.getKey(md5);
-				if(!db.isMacAssociated(md5))
-				{
-					if(db.updateCredentials(key, mac, fname, lname, date.toGMTString()))
-					{
+				if (!db.isMacAssociated(md5)) {
+					if (db.updateCredentials(key, mac, fname, lname, date.toGMTString())) {
 						reply = ac.getAccessCode(key, mac);
-						memory.s.insertTable(mac, clientIP, "Genuine/Registered");
+						memory.s.insertTable(mac, key, "Genuine/Registered");
 						output.writeUTF(reply);
 					}
 				}
-				else
-				{
-					reply = ac.getAccessCode(key, mac);
-					memory.s.insertTable(mac, clientIP, "Fake/Type A");
-					output.writeUTF(reply);
+				if (db.isMacAssociated(md5)) {
+					if (db.isSameMac(mac, md5))
+					{
+						if (db.updateCred(key, fname, lname)) 
+						{
+							reply = ac.getAccessCode(key, mac);
+							memory.s.insertTable(mac, key, "Genuine/Updated");
+							output.writeUTF(reply);
+						}
+
+					} else {
+
+						reply = ac.getAccessCode(key, mac);
+						memory.s.insertTable(mac, key, "Fake/Stolen Key");
+						output.writeUTF(reply);
+					}
 				}
-			}
-			else
-			{
+			} else {
 				reply = "AccessDenied";
-				memory.s.insertTable(mac, clientIP, "Fake/Type B");
+				memory.s.insertTable(mac, key, "Fake/Type B");
 				output.writeUTF(reply);
 			}
-			
-		} catch (IOException e)
-		{
+
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

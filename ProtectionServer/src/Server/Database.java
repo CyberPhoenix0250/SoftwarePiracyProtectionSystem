@@ -237,7 +237,26 @@ class Database
 			return true;
 		}
 	}
-
+	public boolean isSameMac(String mac, String md5)
+	{
+		String m="";
+		try
+		{
+			result = statement.executeQuery("SELECT MAC FROM LicenseTable WHERE MD5 = '" + md5 + "';");
+			result.first();
+			m = result.getString(1);
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		if (m.equals(mac))
+		{
+			return true;
+		} else
+		{
+			return false;
+		}
+	}
 	public boolean updateCredentials(String license, String mac, String fname, String lname, String regdate)
 	{
 		boolean isTrue = false;
@@ -246,6 +265,21 @@ class Database
 		{
 			isTrue = statement.execute("UPDATE LicenseTable SET MAC = '" + mac + "', FNAME = '" + fname
 					+ "', LNAME = '" + lname + "', REGDATE = '" + regdate + "' WHERE LICENSE = '" + license + "';");
+			isTrue = true;
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+			isTrue = false;
+		}
+		return isTrue;
+	}
+	public boolean updateCred(String license,String fname, String lname)
+	{
+		boolean isTrue = false;
+
+		try
+		{
+			isTrue = statement.execute("UPDATE LicenseTable SET FNAME = '" + fname + "', LNAME = '" + lname + "' WHERE LICENSE = '" + license + "';");
 			isTrue = true;
 		} catch (SQLException e)
 		{

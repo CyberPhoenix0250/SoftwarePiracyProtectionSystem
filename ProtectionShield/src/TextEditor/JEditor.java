@@ -13,7 +13,7 @@ class JEditor
 	public JEditor()
 	{
 		window = new JFrame("JEditor");
-		window.setBounds(420, 100, 1024, 800);
+		window.setBounds(420, 100, 1024, 720);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 	}

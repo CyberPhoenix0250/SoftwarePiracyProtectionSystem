@@ -30,7 +30,10 @@ class FourthPage
 	private Registration reg;
 	private boolean isRegistered;
 	private Memory m;
+	private MacDecrypt md;
 	private HashFunction hf;
+	private String accessCode;
+	@SuppressWarnings("deprecation")
 	public FourthPage(Memory memory)
 	{
 		m = memory;
@@ -40,6 +43,7 @@ class FourthPage
 		log = new Log();
 		isRegistered = false;
 		hf = new HashFunction();
+		md = new MacDecrypt();
 //		JFrame window = new JFrame();
 //		window.setTitle("Software Piracy Protection System");
 //		window.getContentPane().setBackground(Color.WHITE);
@@ -206,19 +210,19 @@ class FourthPage
 						mac = m.MacAddress;
 						fname = fnameField.getText();
 						lname = lnameField.getText();
-						System.out.println("MD5 Sent : "+hash);
-						System.out.println("MAC Sent : "+mac);
-						System.out.println("Fname Sent : "+fname);
-						System.out.println("Lname Sent : "+lname);
+//						System.out.println("MD5 Sent : "+hash);
+//						System.out.println("MAC Sent : "+mac);
+//						System.out.println("Fname Sent : "+fname);
+//						System.out.println("Lname Sent : "+lname);
 						reg = new Registration(hash, mac, fname, lname);
 						String code = reg.sendRequest();
-						if(!code.equals("AccessDenied"))
+						if(isValidCode(code))
 						{
 							isRegistered = true;
 							btnNext.setEnabled(true);
-							JOptionPane.showMessageDialog(null, "Product Registration Successful\nAccess Code :"+code, "Registered", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Product Registration Successful", "Registered", JOptionPane.INFORMATION_MESSAGE);
 						}
-						else
+						else if(code.equals("AccessDenied"))
 						{
 							JOptionPane.showMessageDialog(null, "Your Product cannot be Registered.\nPossible Reasons:\n1. Fake License Key\n2. Stolen License Key", "Registration Unsuccessful", JOptionPane.ERROR_MESSAGE);
 							isRegistered = false;
@@ -257,6 +261,20 @@ class FourthPage
 		window.getContentPane().add(label_2);
 
 		window.setVisible(true);
+	}
+	private boolean isValidCode(String enc)
+	{
+		enc = md.decrypt(enc, license);
+		
+		if(m.MacAddress.equals(enc))
+		{
+			accessCode = enc;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	private boolean checkConnectivity()
 	{
