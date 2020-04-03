@@ -11,6 +11,7 @@ class Memory
 	int radioSelection;
 	String LicenseKey;
 	String MacAddress;
+	String AccessCode;
 	public Memory()
 	{
 		radioSelection = 0;

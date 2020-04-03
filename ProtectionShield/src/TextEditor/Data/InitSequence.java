@@ -1,4 +1,4 @@
-package TextEditor;
+package TextEditor.Data;
 
 import javax.swing.JPanel;
 import javax.swing.*;
@@ -10,7 +10,7 @@ import java.awt.Rectangle;
 
 import java.util.concurrent.TimeUnit;
 
-class InitSequence extends JPanel
+public class InitSequence extends JPanel
 {
 	private JFrame window;
 	private JProgressBar bar;
@@ -79,21 +79,21 @@ class InitSequence extends JPanel
 		super.add(lb5);
 		
 		window.setVisible(true);
-//		for(int i = 1 ; i <= 100 ; i++)
-//		{
-//			try
-//			{
-//				TimeUnit.MILLISECONDS.sleep(50);
-//			} catch (InterruptedException e)
-//			{
-//				e.printStackTrace();
-//			}
-//			updateProgress(i);
-//			if(i==100)
-//			{
-//				window.dispose();
-//			}
-//		}
+		for(int i = 1 ; i <= 100 ; i++)
+		{
+			try
+			{
+				TimeUnit.MILLISECONDS.sleep(50);
+			} catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+			updateProgress(i);
+			if(i==100)
+			{
+				window.dispose();
+			}
+		}
 	}
 	public void paintComponent(Graphics g)
 	{

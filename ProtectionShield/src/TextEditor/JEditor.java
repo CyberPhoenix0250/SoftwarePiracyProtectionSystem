@@ -13,7 +13,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.ComponentOrientation;
 import java.awt.GraphicsEnvironment;
-
+import TextEditor.Data.*;
 import javax.swing.border.SoftBevelBorder;
 import java.awt.Font;
 
@@ -157,8 +157,7 @@ class JEditor
 	}
 	public static void main(String args[])
 	{
+		new InitSequence();
 		new JEditor();
-	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
 	}
 }
