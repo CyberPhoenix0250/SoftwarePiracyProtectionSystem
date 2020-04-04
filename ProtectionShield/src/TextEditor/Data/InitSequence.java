@@ -1,6 +1,5 @@
 package TextEditor.Data;
 
-import javax.swing.JPanel;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
@@ -8,7 +7,6 @@ import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.concurrent.TimeUnit;
 
@@ -23,6 +21,7 @@ public class InitSequence extends JPanel
 	private MacDecrypt md;
 	public InitSequence()
 	{
+		
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		Rectangle rect = ge.getMaximumWindowBounds();
 		window = new JFrame();
@@ -146,7 +145,7 @@ public class InitSequence extends JPanel
 		incrementProgress();//progress 1
 		boolean isFine = false;
 		incrementProgress();//progress 2
-		File file = new File("src/TextEditor/Data/Variables.dat");
+		File file = new File("TextEditor/Data/Variables.dat");
 		incrementProgress();//progress 3
 		try
 		{
@@ -194,7 +193,6 @@ public class InitSequence extends JPanel
 		String genMac = mac.getMAC();
 		incrementProgress();//progress 17
 		
-		System.out.println("regMAC : "+regMac+"  genMAC : "+genMac);
 		if(regMac.equals(genMac))
 		{
 			incrementProgress();//progress 18

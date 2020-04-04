@@ -25,8 +25,12 @@ class FifthPage
 	private JFileChooser filechooser;
 	private JProgressBar progressBar;
 	private CopyFile cp;
-	public FifthPage()
+	private Memory m;
+	private Log log;
+	public FifthPage(Memory m)
 	{
+		m = new Memory();
+		log = m.log;
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		Rectangle rect = ge.getMaximumWindowBounds();
 		try
@@ -95,7 +99,14 @@ class FifthPage
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-				progressBar.setVisible(true);
+				if(btnNext.getText().equals("Install"))
+				{
+					progressBar.setVisible(true);
+				}
+				if(btnNext.getText().equals("Finish"))
+				{
+					
+				}
 			}
 		});
 		btnNext.setFont(new Font("Alice", Font.BOLD, 16));
@@ -108,7 +119,7 @@ class FifthPage
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-
+				
 			}
 		});
 		button_1.setFont(new Font("Alice", Font.BOLD, 16));
@@ -152,7 +163,14 @@ class FifthPage
 				{
 					File file = filechooser.getSelectedFile();
 					String path = file.getPath();
-					extractFiles(path);
+					try
+					{
+						extractFiles(path);
+					} catch (Exception e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
@@ -174,39 +192,61 @@ class FifthPage
 
 		window.setVisible(true);
 	}
-	public boolean extractFiles(String path)
+	public void incrementProgress(int value)
+	{
+		progressBar.setValue(value);
+	}
+	public boolean extractFiles(String path) throws Exception
 	{
 		cp = new CopyFile();
-		File des;
-		//First Making the Root directory
-		des = new File(path+"/JEditor/");
-		des.mkdir();
+	
 		//Now the Directory is done
-		
-		File file1 = new File("src/TextEditor/JEditor.java");
-		File file2 = new File("src/TextEditor/Data/Constants.java");
-		File file3 = new File("src/TextEditor/Data/Decryption.java");
-		File file4 = new File("src/TextEditor/Data/InitSequence.java");
-		File file5 = new File("src/TextEditor/Data/LicenseKey.java");
-		File file6 = new File("src/TextEditor/Data/MacDecrypt.java");
+		File file1 = new File("bin/TextEditor/JEditor.class");
+		File file2 = new File("bin/TextEditor/Data/Constants.class");
+		File file3 = new File("bin/TextEditor/Data/Decryption.class");
+		File file4 = new File("bin/TextEditor/Data/InitSequence.class");
+		File file5 = new File("bin/TextEditor/Data/LicenseKey.class");
+		File file6 = new File("bin/TextEditor/Data/MacDecrypt.class");
 		File file7 = new File("src/TextEditor/Data/Variables.dat");
+		File file8 = new File("bin/TextEditor/Data/MAC.class");
+		File imp1 = new File("src/Tools/classpath");
+		File imp2 = new File("src/Tools/project");
+		File run = new File("src/Tools/run.sh");
 		
-//		try
-//		{
-//			cp.copyFile(file1, des);
-//		} catch (Exception e)
-//		{
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		File des;
+		des = new File(path+"/Product/");
+		des.mkdir();
+		des = new File(path+"/Product/TextEditor/");
+		des.mkdir();
+		des = new File(path+"/Product/.classpath");
+		cp.copyFile(imp1, des);
+		des = new File(path+"/Product/.project");
+		cp.copyFile(imp2, des);
+		des = new File(path+"/Product/run.sh");
+		cp.copyFile(run	, des);
+		des = new File(path+"/Product/TextEditor/JEditor.class");
+		cp.copyFile(file1, des);
+		des = new File(path+"/Product/TextEditor/Data/");
+		des.mkdir();
+		des = new File(path+"/Product/TextEditor/Data/Constants.class");
+		cp.copyFile(file2, des);
+		des = new File(path+"/Product/TextEditor/Data/Decryption.class");
+		cp.copyFile(file3, des);
+		des = new File(path+"/Product/TextEditor/Data/InitSequence.class");
+		cp.copyFile(file4, des);
+		des = new File(path+"/Product/TextEditor/Data/LicenseKey.class");
+		cp.copyFile(file5, des);
+		des = new File(path+"/Product/TextEditor/Data/MacDecrypt.class");
+		cp.copyFile(file6, des);
+		des = new File(path+"/Product/TextEditor/Data/Variables.dat");
+		cp.copyFile(file7, des);
+		des = new File(path+"/Product/TextEditor/Data/MAC.class");
+		cp.copyFile(file8, des);
+		
 		return false;
 	}
 	public void updateProgress(int value)
 	{
 		progressBar.setValue(value);
-	}
-	public static void main(String args[])
-	{
-		new FifthPage();
 	}
 }

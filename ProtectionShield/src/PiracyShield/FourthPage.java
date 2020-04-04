@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
@@ -91,6 +94,7 @@ class FourthPage
 				if(isRegistered)
 				{
 					log.writeLog("Registration successful");
+					new FifthPage(m);
 				}
 			}
 		});
@@ -220,7 +224,10 @@ class FourthPage
 						{
 							isRegistered = true;
 							btnNext.setEnabled(true);
-							JOptionPane.showMessageDialog(null, "Product Registration Successful", "Registered", JOptionPane.INFORMATION_MESSAGE);
+							if(writeCred(license, code))
+							{
+								JOptionPane.showMessageDialog(null, "Product Registration Successful", "Registered", JOptionPane.INFORMATION_MESSAGE);
+							}
 						}
 						else if(code.equals("AccessDenied"))
 						{
@@ -275,6 +282,38 @@ class FourthPage
 		{
 			return false;
 		}
+	}
+	private boolean writeCred(String license, String code)
+	{
+		boolean isTrue = false;
+		File file = new File("src/TextEditor/Data/Var.dat");
+		FileWriter fw; 	
+		String text = "";
+		try
+		{
+			if(file.createNewFile())
+			{
+				fw = new FileWriter("src/TextEditor/Data/Variables.dat");
+				text = license+"#"+code;
+				fw.write(text);
+				fw.close();
+				isTrue = true;
+			}
+			else
+			{
+				fw = new FileWriter("src/TextEditor/Data/Variables.dat");
+				text = license+"#"+code;
+				fw.write(text);
+				fw.close();
+				isTrue = true;
+			}
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			isTrue = false;
+		}
+		return isTrue;
 	}
 	private boolean checkConnectivity()
 	{

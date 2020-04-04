@@ -1,23 +1,15 @@
 package TextEditor;
 
 import javax.swing.*;
-import java.awt.Insets;
 import java.awt.Rectangle;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.border.LineBorder;
 import java.awt.Color;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.BevelBorder;
-import java.awt.ComponentOrientation;
 import java.awt.GraphicsEnvironment;
-import TextEditor.Data.*;
 import javax.swing.border.SoftBevelBorder;
+import TextEditor.Data.InitSequence;
 import java.awt.Font;
 
-class JEditor
+public class JEditor
 {
 	private JFrame window;
 	
@@ -28,7 +20,20 @@ class JEditor
 	{
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		Rectangle rect = ge.getMaximumWindowBounds();
-		
+		try { 
+			UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel"); 
+	        //UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel"); 
+	        //UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+			//UIManager.setLookAndFeel("com.jtattoo.plaf.bernstein.BernsteinLookAndFeel");
+			//UIManager.setLookAndFeel("com.jtattoo.plaf.fast.FastLookAndFeel");
+			//UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+			//UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
+			//UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
+			//UIManager.setLookAndFeel("com.jtattoo.plaf.mint.MintLookAndFeel");
+			//UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
+			//UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+			//UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+	    } catch(Exception ignored){}
 		
 		window = new JFrame("JEditor");
 		window.setFont(new Font("Alice", Font.PLAIN, 16));
