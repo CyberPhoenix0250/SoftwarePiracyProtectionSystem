@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
-
 import java.util.concurrent.TimeUnit;
 
 public class InitSequence extends JPanel
@@ -122,6 +121,10 @@ public class InitSequence extends JPanel
 	public void updateProgress(int value)
 	{
 		bar.setValue(value);
+	}
+	public boolean isAllClear()
+	{
+		return true;
 	}
 	public static void main(String args[])
 	{

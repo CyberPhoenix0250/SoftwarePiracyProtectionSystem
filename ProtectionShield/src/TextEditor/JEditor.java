@@ -151,13 +151,12 @@ class JEditor
 		mnHelp.add(mntmAboutJeditor);
 		window.setVisible(true);
 	}
-	private void updateTitle(String filename)
-	{
-		window.setTitle("JEditor   -   "+filename);
-	}
 	public static void main(String args[])
 	{
-		new InitSequence();
-		new JEditor();
+		InitSequence is = new InitSequence();
+		if(is.isAllClear())
+		{
+			new JEditor();
+		}
 	}
 }
