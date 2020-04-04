@@ -2,72 +2,82 @@ package PiracyShield;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.IOException;
+
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JSeparator;
-import javax.swing.UIManager;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JProgressBar;
-import TextEditor.*;
+
 class FifthPage
 {
+	private JFrame window;
 	private JTextField textField;
 	private JFileChooser filechooser;
 	private JProgressBar progressBar;
 	private CopyFile cp;
 	private Memory m;
 	private Log log;
-	public FifthPage(Memory m)
+	private String path;
+	public FifthPage(Memory memory)
 	{
-		m = new Memory();
+		m = memory;
 		log = m.log;
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		Rectangle rect = ge.getMaximumWindowBounds();
-		try
-		{
-			UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
-			// UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
-			// UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
-			// UIManager.setLookAndFeel("com.jtattoo.plaf.bernstein.BernsteinLookAndFeel");
-			// UIManager.setLookAndFeel("com.jtattoo.plaf.fast.FastLookAndFeel");
-			// UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
-			// UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
-			// UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
-			// UIManager.setLookAndFeel("com.jtattoo.plaf.mint.MintLookAndFeel");
-			// UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
-			// UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
-			// UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
-		} catch (Exception ignored)
-		{
-		}
-
-		JFrame window = new JFrame();
-		window.setTitle("Software Piracy Protection System");
-		window.getContentPane().setBackground(Color.WHITE);
-		window.setResizable(false);
-		window.setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/Images/shield.png")));
-		window.getContentPane().setLayout(null);
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		int sl = rect.width;
-		int sb = rect.height;
-		int wl = 700;
-		int wb = 500;
-		int x = ((sl / 2) - (wl / 2));
-		int y = ((sb / 2) - (wb / 2));
-		window.setBounds(x, y, wl, wb);
+		window = m.window;
+//		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//		Rectangle rect = ge.getMaximumWindowBounds();
+//		try
+//		{
+//			UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+//			// UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
+//			// UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+//			// UIManager.setLookAndFeel("com.jtattoo.plaf.bernstein.BernsteinLookAndFeel");
+//			// UIManager.setLookAndFeel("com.jtattoo.plaf.fast.FastLookAndFeel");
+//			// UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+//			// UIManager.setLookAndFeel("com.jtattoo.plaf.luna.LunaLookAndFeel");
+//			// UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
+//			// UIManager.setLookAndFeel("com.jtattoo.plaf.mint.MintLookAndFeel");
+//			// UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
+//			// UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+//			// UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+//		} catch (Exception ignored)
+//		{
+//		}
+//
+//		JFrame window = new JFrame();
+//		window.setTitle("Software Piracy Protection System");
+//		window.getContentPane().setBackground(Color.WHITE);
+//		window.setResizable(false);
+//		window.setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/Images/shield.png")));
+//		window.getContentPane().setLayout(null);
+//		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		int sl = rect.width;
+//		int sb = rect.height;
+//		int wl = 700;
+//		int wb = 500;
+//		int x = ((sl / 2) - (wl / 2));
+//		int y = ((sb / 2) - (wb / 2));
+//		window.setBounds(x, y, wl, wb);
 
 		filechooser = new JFileChooser();
 		filechooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		
+		progressBar = new JProgressBar();
+		progressBar.setForeground(Color.DARK_GRAY);
+		progressBar.setBounds(25, 284, 640, 20);
+		progressBar.setValue(0);
+		progressBar.setVisible(true);
+		window.getContentPane().add(progressBar);
+		
 		
 		JSeparator separator = new JSeparator();
 		separator.setForeground(Color.BLACK);
@@ -101,30 +111,25 @@ class FifthPage
 			{
 				if(btnNext.getText().equals("Install"))
 				{
-					progressBar.setVisible(true);
+					try
+					{
+						extractFiles(path);
+						progressBar.setValue(100);
+					} catch (Exception e1)
+					{
+						e1.printStackTrace();
+					}
+					btnNext.setText("Finish");
 				}
-				if(btnNext.getText().equals("Finish"))
+				else if(btnNext.getText().equals("Finish"))
 				{
-					
+					window.dispose();
 				}
 			}
 		});
 		btnNext.setFont(new Font("Alice", Font.BOLD, 16));
 		btnNext.setBounds(460, 417, 95, 27);
 		window.getContentPane().add(btnNext);
-
-		JButton button_1 = new JButton("< Back");
-		button_1.addMouseListener(new MouseAdapter()
-		{
-			@Override
-			public void mouseClicked(MouseEvent e)
-			{
-				
-			}
-		});
-		button_1.setFont(new Font("Alice", Font.BOLD, 16));
-		button_1.setBounds(348, 417, 95, 27);
-		window.getContentPane().add(button_1);
 
 		JLabel lblNewLabel = new JLabel("Select Destination Location");
 		lblNewLabel.setFont(new Font("Alice", Font.BOLD, 24));
@@ -162,15 +167,8 @@ class FifthPage
 				if(opt == JFileChooser.APPROVE_OPTION)
 				{
 					File file = filechooser.getSelectedFile();
-					String path = file.getPath();
-					try
-					{
-						extractFiles(path);
-					} catch (Exception e1)
-					{
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					path = file.getPath();
+					textField.setText(path);
 				}
 			}
 		});
@@ -183,32 +181,25 @@ class FifthPage
 		lblAtLeast.setBounds(25, 360, 600, 27);
 		window.getContentPane().add(lblAtLeast);
 		
-		progressBar = new JProgressBar();
-		progressBar.setForeground(Color.DARK_GRAY);
-		progressBar.setBounds(25, 284, 640, 20);
-		progressBar.setValue(0);
-		progressBar.setVisible(false);
-		window.getContentPane().add(progressBar);
+		
 
-		window.setVisible(true);
-	}
-	public void incrementProgress(int value)
-	{
-		progressBar.setValue(value);
+//		window.setVisible(true);
 	}
 	public boolean extractFiles(String path) throws Exception
 	{
 		cp = new CopyFile();
-	
+		
 		//Now the Directory is done
 		File file1 = new File("bin/TextEditor/JEditor.class");
 		File file2 = new File("bin/TextEditor/Data/Constants.class");
 		File file3 = new File("bin/TextEditor/Data/Decryption.class");
 		File file4 = new File("bin/TextEditor/Data/InitSequence.class");
 		File file5 = new File("bin/TextEditor/Data/LicenseKey.class");
+		
 		File file6 = new File("bin/TextEditor/Data/MacDecrypt.class");
 		File file7 = new File("src/TextEditor/Data/Variables.dat");
 		File file8 = new File("bin/TextEditor/Data/MAC.class");
+		
 		File imp1 = new File("src/Tools/classpath");
 		File imp2 = new File("src/Tools/project");
 		File run = new File("src/Tools/run.sh");
@@ -221,6 +212,7 @@ class FifthPage
 		des = new File(path+"/Product/.classpath");
 		cp.copyFile(imp1, des);
 		des = new File(path+"/Product/.project");
+		
 		cp.copyFile(imp2, des);
 		des = new File(path+"/Product/run.sh");
 		cp.copyFile(run	, des);
@@ -228,12 +220,14 @@ class FifthPage
 		cp.copyFile(file1, des);
 		des = new File(path+"/Product/TextEditor/Data/");
 		des.mkdir();
+		
 		des = new File(path+"/Product/TextEditor/Data/Constants.class");
 		cp.copyFile(file2, des);
 		des = new File(path+"/Product/TextEditor/Data/Decryption.class");
 		cp.copyFile(file3, des);
 		des = new File(path+"/Product/TextEditor/Data/InitSequence.class");
 		cp.copyFile(file4, des);
+		
 		des = new File(path+"/Product/TextEditor/Data/LicenseKey.class");
 		cp.copyFile(file5, des);
 		des = new File(path+"/Product/TextEditor/Data/MacDecrypt.class");

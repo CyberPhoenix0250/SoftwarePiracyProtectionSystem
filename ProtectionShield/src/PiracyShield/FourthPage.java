@@ -36,6 +36,7 @@ class FourthPage
 	private MacDecrypt md;
 	private HashFunction hf;
 	private String accessCode;
+
 	@SuppressWarnings("deprecation")
 	public FourthPage(Memory memory)
 	{
@@ -44,7 +45,6 @@ class FourthPage
 		log = m.log;
 		license = m.LicenseKey;
 		log = new Log();
-		isRegistered = false;
 		hf = new HashFunction();
 		md = new MacDecrypt();
 //		JFrame window = new JFrame();
@@ -86,18 +86,19 @@ class FourthPage
 
 		JButton btnNext = new JButton("Next >");
 		btnNext.setEnabled(false);
+		btnNext.setVisible(false);
 		btnNext.addMouseListener(new MouseAdapter()
 		{
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-				if(isRegistered)
-				{
-					log.writeLog("Registration successful");
-					new FifthPage(m);
-				}
+				log.writeLog("Registration successful");
+				window.getContentPane().removeAll();
+				window.repaint();
+				new FifthPage(m);
 			}
 		});
+
 		btnNext.setFont(new Font("Alice", Font.BOLD, 16));
 		btnNext.setBounds(460, 417, 95, 27);
 		window.getContentPane().add(btnNext);
@@ -204,12 +205,12 @@ class FourthPage
 			public void mouseClicked(MouseEvent e)
 			{
 				log.writeLog("Registration process Started");
-				if(checkConnectivity())
+				if (checkConnectivity())
 				{
 					log.writeLog("Connected");
-					if(!fnameField.getText().equals("") && !lnameField.getText().equals(""))
+					if (!fnameField.getText().equals("") && !lnameField.getText().equals(""))
 					{
-						String hash,mac,fname,lname;
+						String hash, mac, fname, lname;
 						hash = hf.getMd5(license);
 						mac = m.MacAddress;
 						fname = fnameField.getText();
@@ -220,44 +221,47 @@ class FourthPage
 //						System.out.println("Lname Sent : "+lname);
 						reg = new Registration(hash, mac, fname, lname);
 						String code = reg.sendRequest();
-						if(isValidCode(code))
+						if (isValidCode(code))
 						{
-							isRegistered = true;
 							btnNext.setEnabled(true);
-							if(writeCred(license, code))
+							if (writeCred(license, code))
 							{
-								JOptionPane.showMessageDialog(null, "Product Registration Successful", "Registered", JOptionPane.INFORMATION_MESSAGE);
+								//isRegistered = true;
+								JOptionPane.showMessageDialog(null, "Product Registration Successful", "Registered",
+										JOptionPane.INFORMATION_MESSAGE);
+								btnNext.setVisible(true);
 							}
-						}
-						else if(code.equals("AccessDenied"))
+						} else if (code.equals("AccessDenied"))
 						{
-							JOptionPane.showMessageDialog(null, "Your Product cannot be Registered.\nPossible Reasons:\n1. Fake License Key\n2. Stolen License Key", "Registration Unsuccessful", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null,
+									"Your Product cannot be Registered.\nPossible Reasons:\n1. Fake License Key\n2. Stolen License Key",
+									"Registration Unsuccessful", JOptionPane.ERROR_MESSAGE);
 							isRegistered = false;
 						}
-					}
-					else
+					} else
 					{
 						log.writeLog("Fields are empty");
-						JOptionPane.showMessageDialog(null, "Please enter first name and last name", "Empty Fields", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Please enter first name and last name", "Empty Fields",
+								JOptionPane.ERROR_MESSAGE);
 					}
-				}
-				else
+				} else
 				{
 					log.writeLog("No internet");
-					JOptionPane.showMessageDialog(null, "Your computer is not connected to the internet", "No Internet", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Your computer is not connected to the internet", "No Internet",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
 		btnRegister.setFont(new Font("Alice", Font.BOLD, 16));
 		btnRegister.setBounds(554, 340, 95, 27);
 		window.getContentPane().add(btnRegister);
-		
+
 		JLabel lblDate = new JLabel("Date");
 		lblDate.setFont(new Font("Alice", Font.PLAIN, 18));
 		lblDate.setBounds(30, 341, 115, 24);
 		window.getContentPane().add(lblDate);
-		
-	    Date date = new Date();
+
+		Date date = new Date();
 		JLabel label_2 = new JLabel("");
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
 		label_2.setFont(new Font("Orbitron", Font.PLAIN, 18));
@@ -269,55 +273,55 @@ class FourthPage
 
 		window.setVisible(true);
 	}
+
 	private boolean isValidCode(String enc)
 	{
 		enc = md.decrypt(enc, license);
-		
-		if(m.MacAddress.equals(enc))
+
+		if (m.MacAddress.equals(enc))
 		{
 			accessCode = enc;
 			return true;
-		}
-		else
+		} else
 		{
 			return false;
 		}
 	}
+
 	private boolean writeCred(String license, String code)
 	{
 		boolean isTrue = false;
 		File file = new File("src/TextEditor/Data/Var.dat");
-		FileWriter fw; 	
+		FileWriter fw;
 		String text = "";
 		try
 		{
-			if(file.createNewFile())
+			if (file.createNewFile())
 			{
 				fw = new FileWriter("src/TextEditor/Data/Variables.dat");
-				text = license+"#"+code;
+				text = license + "#" + code;
 				fw.write(text);
 				fw.close();
 				isTrue = true;
-			}
-			else
+			} else
 			{
 				fw = new FileWriter("src/TextEditor/Data/Variables.dat");
-				text = license+"#"+code;
+				text = license + "#" + code;
 				fw.write(text);
 				fw.close();
 				isTrue = true;
 			}
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			isTrue = false;
 		}
 		return isTrue;
 	}
+
 	private boolean checkConnectivity()
 	{
-		boolean isConnected=false;
+		boolean isConnected = false;
 		try
 		{
 			log.writeLog("Checking Internet Connectivity.");
