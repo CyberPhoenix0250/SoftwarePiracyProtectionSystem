@@ -154,7 +154,7 @@ class JEditor
 	public static void main(String args[])
 	{
 		InitSequence is = new InitSequence();
-		if(is.isAllClear())
+		if(is.authentication())
 		{
 			new JEditor();
 		}

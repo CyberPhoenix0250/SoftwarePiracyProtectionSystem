@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -151,7 +152,7 @@ class FifthPage
 				{
 					File file = filechooser.getSelectedFile();
 					String path = file.getPath();
-					
+					extractFiles(path);
 				}
 			}
 		});
@@ -176,15 +177,28 @@ class FifthPage
 	public boolean extractFiles(String path)
 	{
 		cp = new CopyFile();
-		File file1 = new File("ProtectionShield/src/TextEditor/JEditor.java");
-		File file2 = new File("ProtectionShield/src/TextEditor/Data/Constants.java");
-		File file3 = new File("ProtectionShield/src/TextEditor/Data/Decryption.java");
-		File file4 = new File("ProtectionShield/src/TextEditor/Data/InitSequence.java");
-		File file5 = new File("ProtectionShield/src/TextEditor/Data/LicenseKey.java");
-		File file6 = new File("ProtectionShield/src/TextEditor/Data/MacDecrypt.java");
-		File file7 = new File("ProtectionShield/src/TextEditor/Data/Variables.dat");
+		File des;
+		//First Making the Root directory
+		des = new File(path+"/JEditor/");
+		des.mkdir();
+		//Now the Directory is done
 		
+		File file1 = new File("src/TextEditor/JEditor.java");
+		File file2 = new File("src/TextEditor/Data/Constants.java");
+		File file3 = new File("src/TextEditor/Data/Decryption.java");
+		File file4 = new File("src/TextEditor/Data/InitSequence.java");
+		File file5 = new File("src/TextEditor/Data/LicenseKey.java");
+		File file6 = new File("src/TextEditor/Data/MacDecrypt.java");
+		File file7 = new File("src/TextEditor/Data/Variables.dat");
 		
+//		try
+//		{
+//			cp.copyFile(file1, des);
+//		} catch (Exception e)
+//		{
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return false;
 	}
 	public void updateProgress(int value)

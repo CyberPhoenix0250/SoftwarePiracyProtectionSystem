@@ -28,4 +28,10 @@ class MacEncrypt
 		temp = e.encrypt(temp);
 		return temp;
 	}
+	public static void main(String args[])
+	{
+		MacEncrypt me = new MacEncrypt();
+		String key = "yh62e1f40ck565c19b36l103".toUpperCase();
+		System.out.println("The Key "+key+" Hash : "+me.getEncrypted(key, "EC:55:F9:7D:60:81"));
+	}
 }

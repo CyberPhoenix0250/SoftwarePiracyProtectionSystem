@@ -17,7 +17,7 @@ import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-class Server
+public class Server
 {
 	private static Memory m;
 	private JFrame window;

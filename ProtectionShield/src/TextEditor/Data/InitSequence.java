@@ -7,12 +7,20 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.concurrent.TimeUnit;
 
 public class InitSequence extends JPanel
 {
 	private JFrame window;
 	private JProgressBar bar;
+	private String license;
+	private String code;
+	private int value = 0;
+	private MAC mac;
+	private MacDecrypt md;
 	public InitSequence()
 	{
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -22,6 +30,9 @@ public class InitSequence extends JPanel
 		window.getContentPane().setLayout(null);
 		window.getContentPane().add(this);
 		window.getContentPane().setBackground(Color.BLACK);
+		
+		mac = new MAC();
+		md = new MacDecrypt();
 		
 		bar = new JProgressBar();
 		bar.setBounds(150, 380, 400, 15);
@@ -78,21 +89,21 @@ public class InitSequence extends JPanel
 		super.add(lb5);
 		
 		window.setVisible(true);
-		for(int i = 1 ; i <= 100 ; i++)
-		{
-			try
-			{
-				TimeUnit.MILLISECONDS.sleep(50);
-			} catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
-			updateProgress(i);
-			if(i==100)
-			{
-				window.dispose();
-			}
-		}
+//		for(int i = 1 ; i <= 100 ; i++)
+//		{
+//			try
+//			{
+//				TimeUnit.MILLISECONDS.sleep(50);
+//			} catch (InterruptedException e)
+//			{
+//				e.printStackTrace();
+//			}
+//			incrementProgress();
+//			if(i==100)
+//			{
+//				window.dispose();
+//			}
+//		}
 	}
 	public void paintComponent(Graphics g)
 	{
@@ -117,17 +128,84 @@ public class InitSequence extends JPanel
 			x1=x1+5;
 			y2=y2-5;
 		}
-	}
-	public void updateProgress(int value)
+	} 
+	public void incrementProgress()
 	{
+		try
+		{
+			TimeUnit.MILLISECONDS.sleep(200);
+		} catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+		value = value+5;
 		bar.setValue(value);
 	}
-	public boolean isAllClear()
+	public boolean readData()
 	{
-		return true;
+		incrementProgress();//progress 1
+		boolean isFine = false;
+		incrementProgress();//progress 2
+		File file = new File("src/TextEditor/Data/Variables.dat");
+		incrementProgress();//progress 3
+		try
+		{
+			incrementProgress();//progress 4
+			
+			FileReader fr = new FileReader(file);
+			incrementProgress();//progress 5
+			
+			char key[] = new char[38];
+			incrementProgress();//progress 6
+			
+			fr.read(key);
+			incrementProgress();//progress 7
+			
+			String rec = new String(key);
+			incrementProgress();//progress 8
+			
+			String var[] = rec.split("#");
+			incrementProgress();//progress 9
+			
+			license = var[0];
+			incrementProgress();//progress 10
+			
+			code = var[1];
+			incrementProgress();//progress 11
+			
+			isFine = true;
+			incrementProgress();//progress 12
+			
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+			isFine = false;
+		}
+		incrementProgress();//progress 13
+		return isFine;
 	}
-	public static void main(String args[])
+	public boolean authentication()
 	{
-		new InitSequence();
+		incrementProgress();//progress 14
+		readData();
+		incrementProgress();//progress 15
+		String regMac = md.decrypt(code, license);
+		incrementProgress();//progress 16
+		String genMac = mac.getMAC();
+		incrementProgress();//progress 17
+		
+		System.out.println("regMAC : "+regMac+"  genMAC : "+genMac);
+		if(regMac.equals(genMac))
+		{
+			incrementProgress();//progress 18
+			incrementProgress();//progress 19
+			incrementProgress();//progress 20
+			return true;
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(window, "Invalid Product Key", "Authentication failed", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
 	}
 }
