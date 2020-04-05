@@ -35,7 +35,6 @@ class FourthPage
 	private Memory m;
 	private MacDecrypt md;
 	private HashFunction hf;
-	private JOptionPane jp;
 	private String accessCode;
 
 	@SuppressWarnings("deprecation")
@@ -46,7 +45,6 @@ class FourthPage
 		log = m.log;
 		license = m.LicenseKey;
 		log = new Log();
-		jp = new JOptionPane();
 		hf = new HashFunction();
 		md = new MacDecrypt();
 //		JFrame window = new JFrame();
@@ -229,13 +227,13 @@ class FourthPage
 							if (writeCred(license, code))
 							{
 								//isRegistered = true;
-								jp.showMessageDialog(window, "Product Registration Successful", "Registered",
+								JOptionPane.showMessageDialog(window, "Product Registration Successful", "Registered",
 										JOptionPane.INFORMATION_MESSAGE);
 								btnNext.setVisible(true);
 							}
 						} else if (code.equals("AccessDenied"))
 						{
-							jp.showMessageDialog(null,
+							JOptionPane.showMessageDialog(null,
 									"Your Product cannot be Registered.\nPossible Reasons:\n1. Fake License Key\n2. Stolen License Key",
 									"Registration Unsuccessful", JOptionPane.ERROR_MESSAGE);
 							isRegistered = false;
@@ -243,13 +241,13 @@ class FourthPage
 					} else
 					{
 						log.writeLog("Fields are empty");
-						jp.showMessageDialog(window, "Please enter first name and last name", "Empty Fields",
+						JOptionPane.showMessageDialog(window, "Please enter first name and last name", "Empty Fields",
 								JOptionPane.ERROR_MESSAGE);
 					}
 				} else
 				{
 					log.writeLog("No internet");
-					jp.showMessageDialog(null, "Your computer is not connected to the internet", "No Internet",
+					JOptionPane.showMessageDialog(null, "Your computer is not connected to the internet", "No Internet",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
