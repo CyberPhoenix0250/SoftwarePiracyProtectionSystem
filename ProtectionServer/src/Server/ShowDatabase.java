@@ -125,6 +125,10 @@ class ShowDatabase
 				{
 					searchData(textField.getText());
 				}
+				if(e.getDot() == 0)
+				{
+					init();
+				}
 			}
 		});
 		window.getContentPane().add(textField);

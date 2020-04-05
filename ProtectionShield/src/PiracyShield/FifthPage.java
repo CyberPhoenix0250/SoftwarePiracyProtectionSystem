@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JSeparator;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JProgressBar;
 
@@ -33,6 +34,7 @@ class FifthPage
 		m = memory;
 		log = m.log;
 		window = m.window;
+		path = "";
 //		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 //		Rectangle rect = ge.getMaximumWindowBounds();
 //		try
@@ -111,15 +113,23 @@ class FifthPage
 			{
 				if(btnNext.getText().equals("Install"))
 				{
-					try
+					if(!path.equals(""))
 					{
-						extractFiles(path);
-						progressBar.setValue(100);
-					} catch (Exception e1)
-					{
-						e1.printStackTrace();
+						try
+						{
+							extractFiles(path);
+							progressBar.setValue(100);
+						} catch (Exception e1)
+						{
+							e1.printStackTrace();
+						}
+						btnNext.setText("Finish");
 					}
-					btnNext.setText("Finish");
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Please select a destination path", "Path not selected", JOptionPane.ERROR_MESSAGE);
+					}
+					
 				}
 				else if(btnNext.getText().equals("Finish"))
 				{
