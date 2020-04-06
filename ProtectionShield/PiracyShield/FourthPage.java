@@ -31,11 +31,12 @@ class FourthPage
 	private JFrame window;
 	private String license;
 	private Registration reg;
-	private boolean isRegistered;
 	private Memory m;
 	private MacDecrypt md;
 	private HashFunction hf;
 	private String accessCode;
+	private JButton btnNext;
+	private JButton btnRegister;
 
 	@SuppressWarnings("deprecation")
 	public FourthPage(Memory memory)
@@ -84,7 +85,7 @@ class FourthPage
 		btnCancel.setBounds(572, 417, 95, 27);
 		window.getContentPane().add(btnCancel);
 
-		JButton btnNext = new JButton("Next >");
+		btnNext = new JButton("Next >");
 		btnNext.setEnabled(false);
 		btnNext.setVisible(false);
 		btnNext.addMouseListener(new MouseAdapter()
@@ -198,7 +199,7 @@ class FourthPage
 		label_1.setFont(new Font("Orbitron", Font.PLAIN, 18));
 		window.getContentPane().add(label_1);
 
-		JButton btnRegister = new JButton("Register");
+		btnRegister = new JButton("Register");
 		btnRegister.addMouseListener(new MouseAdapter()
 		{
 			@Override
@@ -215,28 +216,23 @@ class FourthPage
 						mac = m.MacAddress;
 						fname = fnameField.getText();
 						lname = lnameField.getText();
-//						System.out.println("MD5 Sent : "+hash);
-//						System.out.println("MAC Sent : "+mac);
-//						System.out.println("Fname Sent : "+fname);
-//						System.out.println("Lname Sent : "+lname);
 						reg = new Registration(hash, mac, fname, lname);
 						String code = reg.sendRequest();
 						if (isValidCode(code))
 						{
+
+							writeCred(license, code);
+							// isRegistered = true;
+							JOptionPane.showMessageDialog(window, "Product Registration Successful", "Registered",
+									JOptionPane.INFORMATION_MESSAGE);
+							btnNext.setVisible(true);
 							btnNext.setEnabled(true);
-							if (writeCred(license, code))
-							{
-								//isRegistered = true;
-								JOptionPane.showMessageDialog(window, "Product Registration Successful", "Registered",
-										JOptionPane.INFORMATION_MESSAGE);
-								btnNext.setVisible(true);
-							}
+
 						} else if (code.equals("AccessDenied"))
 						{
 							JOptionPane.showMessageDialog(null,
 									"Your Product cannot be Registered.\nPossible Reasons:\n1. Fake License Key\n2. Stolen License Key",
 									"Registration Unsuccessful", JOptionPane.ERROR_MESSAGE);
-							isRegistered = false;
 						}
 					} else
 					{
@@ -288,35 +284,9 @@ class FourthPage
 		}
 	}
 
-	private boolean writeCred(String license, String code)
+	private void writeCred(String license, String code)
 	{
-		boolean isTrue = false;
-		File file = new File("src/TextEditor/Data/Var.dat");
-		FileWriter fw;
-		String text = "";
-		try
-		{
-			if (file.createNewFile())
-			{
-				fw = new FileWriter("src/TextEditor/Data/Variables.dat");
-				text = license + "#" + code;
-				fw.write(text);
-				fw.close();
-				isTrue = true;
-			} else
-			{
-				fw = new FileWriter("src/TextEditor/Data/Variables.dat");
-				text = license + "#" + code;
-				fw.write(text);
-				fw.close();
-				isTrue = true;
-			}
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-			isTrue = false;
-		}
-		return isTrue;
+		m.credentials = license + "#" + code;
 	}
 
 	private boolean checkConnectivity()

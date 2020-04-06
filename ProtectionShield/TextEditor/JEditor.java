@@ -6,16 +6,8 @@ import java.awt.Color;
 import javax.swing.border.BevelBorder;
 import java.awt.GraphicsEnvironment;
 import javax.swing.border.SoftBevelBorder;
-import javax.swing.event.MenuKeyEvent;
-import javax.swing.event.MenuKeyListener;
-
 import TextEditor.Data.InitSequence;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.EventListener;
 
 public class JEditor
 {
@@ -159,28 +151,11 @@ public class JEditor
 		mnHelp.add(mntmHelpContents);
 
 		JMenuItem mntmRegistration = new JMenuItem("Registration");
-		mntmRegistration.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				JOptionPane.showMessageDialog(null, "This Product is registered.", "Registered", JOptionPane.INFORMATION_MESSAGE);
-			}
-
-		});
-
 		mntmRegistration.setFont(new Font("Alice", Font.PLAIN, 16));
 		mnHelp.add(mntmRegistration);
 
 		JMenuItem mntmAboutJeditor = new JMenuItem("About JEditor");
 		mntmAboutJeditor.setFont(new Font("Alice", Font.PLAIN, 16));
-		mntmAboutJeditor.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				JOptionPane.showMessageDialog(null, "JEditor \n It is a simple text editor built by using java programming language.", "About JEDitor", JOptionPane.INFORMATION_MESSAGE);
-			}
-
-		});
 		mnHelp.add(mntmAboutJeditor);
 		window.setVisible(true);
 	}

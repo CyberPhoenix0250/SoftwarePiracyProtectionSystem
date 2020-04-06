@@ -145,8 +145,8 @@ public class InitSequence extends JPanel
 		incrementProgress();//progress 1
 		boolean isFine = false;
 		incrementProgress();//progress 2
-		//File file = new File("TextEditor/Data/Variables.dat");//for real
-		File file = new File("src/TextEditor/Data/Variables.dat");//for testing
+		File file = new File("TextEditor/Data/Variables.dat");//for real
+		//File file = new File("TextEditor/Data/Variables.dat");//for testing
 		incrementProgress();//progress 3
 		try
 		{

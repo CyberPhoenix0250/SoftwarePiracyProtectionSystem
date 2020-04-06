@@ -2,21 +2,23 @@ package PiracyShield;
 
 import java.awt.Color;
 import java.awt.Font;
-
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-
-import java.util.concurrent.TimeUnit;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JSeparator;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JProgressBar;
 
 class FifthPage
@@ -35,6 +37,7 @@ class FifthPage
 		log = m.log;
 		window = m.window;
 		path = "";
+		
 //		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 //		Rectangle rect = ge.getMaximumWindowBounds();
 //		try
@@ -97,7 +100,7 @@ class FifthPage
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-				// log.writeLog("Terminate Application");
+				log.writeLog("Terminate Application");
 				window.dispose();
 			}
 		});
@@ -190,29 +193,25 @@ class FifthPage
 		lblAtLeast.setFont(new Font("Alice", Font.PLAIN, 16));
 		lblAtLeast.setBounds(25, 360, 600, 27);
 		window.getContentPane().add(lblAtLeast);
-		
-		
-
 //		window.setVisible(true);
 	}
-	public boolean extractFiles(String path) throws Exception
+	public void extractFiles(String path) throws Exception
 	{
 		cp = new CopyFile();
 		
 		//Now the Directory is done
-		File file1 = new File("bin/TextEditor/JEditor.class");
-		File file2 = new File("bin/TextEditor/Data/Constants.class");
-		File file3 = new File("bin/TextEditor/Data/Decryption.class");
-		File file4 = new File("bin/TextEditor/Data/InitSequence.class");
-		File file5 = new File("bin/TextEditor/Data/LicenseKey.class");
+		File file1 = new File("TextEditor/JEditor.class");
+		File file2 = new File("TextEditor/Data/Constants.class");
+		File file3 = new File("TextEditor/Data/Decryption.class");
+		File file4 = new File("TextEditor/Data/InitSequence.class");
+		File file5 = new File("TextEditor/Data/LicenseKey.class");
+		File file6 = new File("TextEditor/Data/MacDecrypt.class");
+		//File file7 = new File("TextEditor/Data/Variables.dat");
+		File file8 = new File("TextEditor/Data/MAC.class");
 		
-		File file6 = new File("bin/TextEditor/Data/MacDecrypt.class");
-		File file7 = new File("src/TextEditor/Data/Variables.dat");
-		File file8 = new File("bin/TextEditor/Data/MAC.class");
-		
-		File imp1 = new File("src/Tools/classpath");
-		File imp2 = new File("src/Tools/project");
-		File run = new File("src/Tools/run.sh");
+		File imp1 = new File("Tools/classpath");
+		File imp2 = new File("Tools/project");
+		File run = new File("Tools/run.sh");
 		
 		File des;
 		des = new File(path+"/Product/");
@@ -237,17 +236,50 @@ class FifthPage
 		cp.copyFile(file3, des);
 		des = new File(path+"/Product/TextEditor/Data/InitSequence.class");
 		cp.copyFile(file4, des);
-		
 		des = new File(path+"/Product/TextEditor/Data/LicenseKey.class");
 		cp.copyFile(file5, des);
 		des = new File(path+"/Product/TextEditor/Data/MacDecrypt.class");
 		cp.copyFile(file6, des);
-		des = new File(path+"/Product/TextEditor/Data/Variables.dat");
-		cp.copyFile(file7, des);
+		//des = new File(path+"/Product/TextEditor/Data/Variables.dat");
+		//cp.copyFile(file7, des);
 		des = new File(path+"/Product/TextEditor/Data/MAC.class");
 		cp.copyFile(file8, des);
 		
-		return false;
+		writeCred(path, m.credentials);
+		
+	}
+	private boolean writeCred(String path, String code)
+	{
+		boolean isTrue = false;
+		//System.out.println("before Path "+path);
+		File file = new File(path+"/Product/TextEditor/Data/Variables.dat");
+		FileWriter fw;
+		//System.out.println("After Path : "+file.getPath());
+		String text = "";
+		try
+		{
+			if (file.createNewFile())
+			{
+				fw = new FileWriter(file);
+				text = code;
+				fw.write(text);
+				fw.close();
+				isTrue = true;
+			} else
+			{
+				fw = new FileWriter(file);
+				text = code;
+				fw.write(text);
+				fw.close();
+				isTrue = true;
+			}
+		} catch (IOException e)
+		{
+			JOptionPane.showMessageDialog(window, " Exception occured ", "Exception", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			isTrue = false;
+		}
+		return isTrue;
 	}
 	public void updateProgress(int value)
 	{
