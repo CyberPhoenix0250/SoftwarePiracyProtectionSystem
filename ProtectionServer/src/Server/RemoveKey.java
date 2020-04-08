@@ -151,13 +151,29 @@ class RemoveKey
 	{
 		comboBox.removeAllItems();
 		int[] k = null;
-		k = db.getAllIndex();
+		k = sort(db.getAllIndex());
 		for (int i = 0; i < k.length; i++)
 		{
 			comboBox.addItem(k[i]);
 		}
 	}
-
+	public int[] sort(int arr[])
+	{
+		int temp;
+		for(int i = 0 ; i < arr.length-1 ; i++)
+		{
+			for(int j = i+1 ; j < arr.length ; j++)
+			{
+				if(arr[i] > arr[j])
+				{
+					temp = arr[i];
+					arr[i] = arr[j];
+					arr[j] = temp;
+				}
+			}
+		}
+		return arr;
+	}
 	public boolean removeRow()
 	{
 		String text = comboBox.getSelectedItem().toString();

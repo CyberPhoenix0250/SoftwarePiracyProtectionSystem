@@ -169,11 +169,11 @@ class ShowDatabase
 			table = new JTable();
 			tableModel = new DefaultTableModel(data, col)
 			{
-				@Override
-				public boolean isCellEditable(int row, int column)
-				{
-					return false;
-				}
+//				@Override
+//				public boolean isCellEditable(int row, int column)
+//				{
+//					return false;
+//				}
 			};
 			table = new JTable(tableModel);
 			scrollPane.setViewportView(table);

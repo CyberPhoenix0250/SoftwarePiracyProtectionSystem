@@ -218,7 +218,13 @@ class FourthPage
 						lname = lnameField.getText();
 						reg = new Registration(hash, mac, fname, lname);
 						String code = reg.sendRequest();
-						if (isValidCode(code))
+						if(code.equals("AccessDenied"))
+						{
+							JOptionPane.showMessageDialog(null,
+									"Your Product cannot be Registered.\nPossible Reasons:\n1. Fake License Key\n2. Stolen License Key",
+									"Registration Unsuccessful", JOptionPane.ERROR_MESSAGE);
+						}
+						else if (isValidCode(code))
 						{
 
 							writeCred(license, code);
@@ -228,11 +234,6 @@ class FourthPage
 							btnNext.setVisible(true);
 							btnNext.setEnabled(true);
 
-						} else if (code.equals("AccessDenied"))
-						{
-							JOptionPane.showMessageDialog(null,
-									"Your Product cannot be Registered.\nPossible Reasons:\n1. Fake License Key\n2. Stolen License Key",
-									"Registration Unsuccessful", JOptionPane.ERROR_MESSAGE);
 						}
 					} else
 					{
