@@ -168,5 +168,9 @@ public class JEditor
 			is.window.dispose();
 			new JEditor();
 		}
+		else
+		{
+			is.window.dispose();
+		}
 	}
 }

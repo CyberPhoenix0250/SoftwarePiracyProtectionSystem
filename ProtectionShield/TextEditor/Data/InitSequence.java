@@ -88,21 +88,6 @@ public class InitSequence extends JPanel
 		super.add(lb5);
 		
 		window.setVisible(true);
-//		for(int i = 1 ; i <= 100 ; i++)
-//		{
-//			try
-//			{
-//				TimeUnit.MILLISECONDS.sleep(50);
-//			} catch (InterruptedException e)
-//			{
-//				e.printStackTrace();
-//			}
-//			incrementProgress();
-//			if(i==100)
-//			{
-//				window.dispose();
-//			}
-//		}
 	}
 	public void paintComponent(Graphics g)
 	{
