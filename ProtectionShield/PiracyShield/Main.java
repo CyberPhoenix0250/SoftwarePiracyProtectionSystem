@@ -25,6 +25,7 @@ class Main
 			//UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
 	    } catch(Exception ignored){}
 		
+		new FontSetup();
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		Rectangle rect = ge.getMaximumWindowBounds();
 		
