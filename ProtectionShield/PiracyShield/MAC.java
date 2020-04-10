@@ -18,7 +18,7 @@ class MAC
 	private String MacAddress = "";
 	private String IpAddress = "";
 
-	public MAC()
+	public void inititalize()
 	{
 		String ip;
 		try
@@ -31,22 +31,27 @@ class MAC
 			e.printStackTrace();
 		}
 	}
-
-	public String getRoutableAddress() throws Exception
+	public String getRoutableAddress()
 	{
-		String ip = "";
+		String ip = "null";
 		ArrayList<String> arr = new ArrayList<String>();
 
-		Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
-
-		for (NetworkInterface netint : Collections.list(nets))
+		Enumeration<NetworkInterface> nets;
+		try
 		{
-			Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
-
-			for (InetAddress inetAddress : Collections.list(inetAddresses))
+			nets = NetworkInterface.getNetworkInterfaces();
+			for (NetworkInterface netint : Collections.list(nets))
 			{
-				arr.add(inetAddress.toString().substring(1));
+				Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
+
+				for (InetAddress inetAddress : Collections.list(inetAddresses))
+				{
+					arr.add(inetAddress.toString().substring(1));
+				}
 			}
+		} catch (Exception e)
+		{
+			e.printStackTrace();
 		}
 		for(String txt : arr)
 		{

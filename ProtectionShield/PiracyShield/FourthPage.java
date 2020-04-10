@@ -37,7 +37,7 @@ class FourthPage
 	private String accessCode;
 	private JButton btnNext;
 	private JButton btnRegister;
-
+	private MAC mac;
 	@SuppressWarnings("deprecation")
 	public FourthPage(Memory memory)
 	{
@@ -45,6 +45,7 @@ class FourthPage
 		window = m.window;
 		log = m.log;
 		license = m.LicenseKey;
+		mac = new MAC();
 		log = new Log();
 		hf = new HashFunction();
 		md = new MacDecrypt();
@@ -55,7 +56,7 @@ class FourthPage
 //		window.getContentPane().setLayout(null);
 //		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		window.setBounds(420, 50, 700, 500);
-
+		mac.inititalize();
 		JSeparator separator = new JSeparator();
 		separator.setForeground(Color.BLACK);
 		separator.setBounds(10, 88, 664, 8);
@@ -158,7 +159,6 @@ class FourthPage
 		window.getContentPane().add(lblKey);
 
 		LicenseKey lk = new LicenseKey(license);
-		MAC mac = new MAC();
 
 		JLabel keylabel = new JLabel("");
 		keylabel.setBackground(Color.WHITE);
@@ -218,7 +218,12 @@ class FourthPage
 						lname = lnameField.getText();
 						reg = new Registration(hash, mac, fname, lname);
 						String code = reg.sendRequest();
-						if(code.equals("AccessDenied"))
+						
+						if(code.equals("offline"))
+						{
+							
+						}
+						else if(code.equals("AccessDenied"))
 						{
 							log.writeLog("Server refused");
 							JOptionPane.showMessageDialog(null,
@@ -294,17 +299,12 @@ class FourthPage
 	private boolean checkConnectivity()
 	{
 		boolean isConnected = false;
-		try
+		if(!mac.getRoutableAddress().equals("null"))
 		{
-			log.writeLog("Checking Internet Connectivity.");
-			URL url = new URL("https://www.google.com");
-			URLConnection connection = url.openConnection();
-			connection.connect();
 			isConnected = true;
-			log.writeLog("Internet is available.");
-		} catch (Exception ae)
+		}
+		else
 		{
-			log.writeLog("Internet not available.");
 			isConnected = false;
 		}
 		return isConnected;

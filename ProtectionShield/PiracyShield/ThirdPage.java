@@ -25,12 +25,13 @@ class ThirdPage
 	private Log log;
 	private boolean isCorrect=false;
 	private Memory m;
+	private MAC mac;
 	public ThirdPage(Memory memory)
 	{
 		m = memory;
 		log = m.log;
 		window = m.window;
-		
+		mac = new MAC();
 //		window = new JFrame();
 //		log = new Log();
 //		window.setTitle("Software Piracy Protection System");
@@ -83,6 +84,10 @@ class ThirdPage
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
+				if(!mac.getRoutableAddress().equals("null"))
+				{
+					
+				}
 				try
 				{
 					log.writeLog("Checking Internet Connectivity.");
@@ -232,6 +237,18 @@ class ThirdPage
 		{
 			return false;
 		}
-		
+	}
+	private boolean checkConnectivity()
+	{
+		boolean isConnected = false;
+		if(!mac.getRoutableAddress().equals("null"))
+		{
+			isConnected = true;
+		}
+		else
+		{
+			isConnected = false;
+		}
+		return isConnected;
 	}
 }

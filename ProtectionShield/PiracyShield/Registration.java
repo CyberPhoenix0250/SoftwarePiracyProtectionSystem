@@ -41,14 +41,17 @@ class Registration
 		} catch (ConnectException e)
 		{
 			JOptionPane.showMessageDialog(null, "Server is Offline", "Offline Server", JOptionPane.ERROR_MESSAGE);
+			reply = "offline";
 		}
 		catch(UnknownHostException ue)
 		{
 			JOptionPane.showMessageDialog(null, "Unable to reach the destination", "Unknown Host", JOptionPane.ERROR_MESSAGE);
+			reply = "offline";
 		}
 		catch(IOException ioe)
 		{
 			JOptionPane.showMessageDialog(null, "Data Input/Output Stream error", "Input/Output Error", JOptionPane.ERROR_MESSAGE);
+			reply = "offline";
 		}
 		return reply;
 	}
