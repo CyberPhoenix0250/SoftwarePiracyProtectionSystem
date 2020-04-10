@@ -114,10 +114,13 @@ class FifthPage
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
+				
 				if(btnNext.getText().equals("Install"))
 				{
+					log.writeLog("Install");
 					if(!path.equals(""))
 					{
+						log.writeLog("Extracting files");
 						try
 						{
 							extractFiles(path);
@@ -127,12 +130,13 @@ class FifthPage
 							e1.printStackTrace();
 						}
 						btnNext.setText("Finish");
+						log.writeLog("Extraction Done");
 					}
 					else
 					{
+						log.writeLog("Empty Path");
 						JOptionPane.showMessageDialog(null, "Please select a destination path", "Path not selected", JOptionPane.ERROR_MESSAGE);
-					}
-					
+					}	
 				}
 				else if(btnNext.getText().equals("Finish"))
 				{
@@ -176,9 +180,11 @@ class FifthPage
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
+				log.writeLog("Browse Triggered");
 				int opt = filechooser.showOpenDialog(window);
 				if(opt == JFileChooser.APPROVE_OPTION)
 				{
+					
 					File file = filechooser.getSelectedFile();
 					path = file.getPath();
 					textField.setText(path);

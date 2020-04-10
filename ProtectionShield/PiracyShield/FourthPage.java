@@ -220,13 +220,14 @@ class FourthPage
 						String code = reg.sendRequest();
 						if(code.equals("AccessDenied"))
 						{
+							log.writeLog("Server refused");
 							JOptionPane.showMessageDialog(null,
 									"Your Product cannot be Registered.\nPossible Reasons:\n1. Fake License Key\n2. Stolen License Key",
 									"Registration Unsuccessful", JOptionPane.ERROR_MESSAGE);
 						}
 						else if (isValidCode(code))
 						{
-
+							log.writeLog("Access code is Valid");
 							writeCred(license, code);
 							// isRegistered = true;
 							JOptionPane.showMessageDialog(window, "Product Registration Successful", "Registered",

@@ -1,6 +1,8 @@
 package PiracyShield;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -21,18 +23,62 @@ class MAC
 		String ip;
 		try
 		{
-			Socket socket = new Socket();
-			socket.connect(new InetSocketAddress("google.com", 80));
-			ip = socket.getLocalAddress().toString().substring(1);
-			IpAddress = ip;
+			ip = getRoutableAddress();
+			IpAddress = getRoutableAddress();
 			MacAddress = getMacAddress(ip);
-			socket.close();
 		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
 	}
 
+	public String getRoutableAddress() throws Exception
+	{
+		String ip = "";
+		ArrayList<String> arr = new ArrayList<String>();
+
+		Enumeration<NetworkInterface> nets = NetworkInterface.getNetworkInterfaces();
+
+		for (NetworkInterface netint : Collections.list(nets))
+		{
+			Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
+
+			for (InetAddress inetAddress : Collections.list(inetAddresses))
+			{
+				arr.add(inetAddress.toString().substring(1));
+			}
+		}
+		for(String txt : arr)
+		{
+			if(isIP(txt))
+			{
+				ip = txt;
+				break;
+			}
+		}
+		return ip;
+	}
+	private boolean isIP(String text)
+	{
+		boolean isTrue;
+		int count = 0 ;
+		for(int i = 0 ; i < text.length() ; i++)
+		{
+			if(text.charAt(i) == '.')
+			{
+				count = count+1;
+			}
+		}
+		if(count == 3 && !text.equals("127.0.0.1"))
+		{
+			isTrue = true;
+		}
+		else
+		{
+			isTrue = false;
+		}
+		return isTrue;
+	}
 	public String getMacAddress(String ipAddr) throws UnknownHostException, SocketException
 	{
 		InetAddress addr = InetAddress.getByName(ipAddr);
