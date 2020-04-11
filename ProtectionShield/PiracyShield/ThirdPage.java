@@ -5,6 +5,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JSeparator;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.net.URL;
@@ -86,19 +88,13 @@ class ThirdPage
 			{
 				if(!mac.getRoutableAddress().equals("null"))
 				{
-					
-				}
-				try
-				{
 					log.writeLog("Checking Internet Connectivity.");
-					URL url = new URL("https://www.google.com");
-					URLConnection connection = url.openConnection();
-					connection.connect();
 					status.setText("Internet Connected");
 					status.setForeground(Color.GREEN);
 					status.repaint();
 					log.writeLog("Internet is available.");
-				} catch (Exception ae)
+				}
+				else
 				{
 					log.writeLog("Internet is not available.");
 					status.setText("Internet Disconnected");
@@ -138,19 +134,33 @@ class ThirdPage
 			public void mouseClicked(MouseEvent e)
 			{
 				log.writeLog("");
-				if(isCorrect)
+				if(checkConnectivity())
 				{
-					log.writeLog("Goto Fourth Page");
-					m.LicenseKey = textField.getText();
-					window.getContentPane().removeAll();
-					window.repaint();
-					new FourthPage(m);
+					btnNext.setEnabled(true);
+					if(isCorrect)
+					{
+						log.writeLog("Goto Fourth Page");
+						m.LicenseKey = textField.getText();
+						window.getContentPane().removeAll();
+						window.repaint();
+						new FourthPage(m);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(window, "Please enter a valid license key", "Invalid Key",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(window, "Registration requires internet connection", "No internet",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
 		btnNext.setFont(new Font("Alice", Font.BOLD, 16));
 		btnNext.setBounds(474, 410, 95, 27);
-		btnNext.setEnabled(false);
+		btnNext.setEnabled(true);
 		window.getContentPane().add(btnNext);
 		
 		textField = new JTextField();

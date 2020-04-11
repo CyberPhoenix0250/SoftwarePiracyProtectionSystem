@@ -220,9 +220,7 @@ class FourthPage
 						String code = reg.sendRequest();
 						
 						if(code.equals("offline"))
-						{
-							
-						}
+						{}
 						else if(code.equals("AccessDenied"))
 						{
 							log.writeLog("Server refused");
