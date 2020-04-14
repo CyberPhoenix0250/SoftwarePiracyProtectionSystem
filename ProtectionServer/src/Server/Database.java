@@ -78,13 +78,39 @@ class Database
 		{
 			result = statement.executeQuery("SELECT ID, LICENSE, FNAME, LNAME, REGDATE  FROM LicenseTable;");
 			result.first();
+			String temp="";
 			do
 			{
-				data[i][0] = result.getInt(1);
-				data[i][1] = result.getString(2);
-				data[i][2] = result.getString(3);
-				data[i][3] = result.getString(4);
-				data[i][4] = result.getString(5);
+				data[i][0] = result.getInt(1);//id
+				data[i][1] = result.getString(2);//license
+				
+				temp = result.getString(3);
+				if(!temp.equals("empty"))
+				{
+					data[i][2] = temp;
+				}
+				else
+				{
+					data[i][2] = "";
+				}
+				temp = result.getString(4);
+				if(!temp.equals("empty"))
+				{
+					data[i][3] = temp;
+				}
+				else
+				{
+					data[i][3] = "";
+				}
+				temp = result.getString(5);
+				if(!temp.equals("empty"))
+				{
+					data[i][4] = temp;
+				}
+				else
+				{
+					data[i][4] = "";
+				}
 				i = i + 1;
 			} while (result.next());
 		} catch (SQLException e)

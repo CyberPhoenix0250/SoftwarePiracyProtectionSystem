@@ -78,7 +78,6 @@ class RequestHandler extends Thread
 
 					} else
 					{
-
 						reply = ac.getAccessCode(key, mac);
 						memory.s.insertTable(mac, key, "Fake/Stolen Key");
 						output.writeUTF(reply);
@@ -87,7 +86,7 @@ class RequestHandler extends Thread
 			} else
 			{
 				reply = "AccessDenied";
-				memory.s.insertTable(mac, key, "Fake/Type B");
+				memory.s.insertTable(mac, key, "Fake/Key not Present");
 				output.writeUTF(reply);
 			}
 

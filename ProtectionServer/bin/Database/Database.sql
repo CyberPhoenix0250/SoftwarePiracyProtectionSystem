@@ -1,10 +1,7 @@
 
-show databases;
 create database LicenseDatabase;
 
-show tables;
-describe LicenseTable;
-drop table LicenseTable;
+use LicenseDatabase;
 
 CREATE TABLE `LicenseTable` (
 	`ID` INT unsigned NOT NULL AUTO_INCREMENT,
@@ -16,33 +13,6 @@ CREATE TABLE `LicenseTable` (
 	`REGDATE` VARCHAR(50) DEFAULT 'empty',
 	PRIMARY KEY (`ID`,`LICENSE`)
 );
-
-show tables;
-
-
-use LicenseDatabase;
-SELECT * FROM LicenseTable;
-
-select Count(*) from LicenseTable;
-
-UPDATE LicenseTable SET MAC = '04:d4:c4:7b:d4:86', FNAME = 'Jonathan', LNAME = 'James', REGDATE = '12-04-2020' WHERE LICENSE = 'NS21H1X29HQ326V67G44L845';
-
-
-select * from LicenseTable where ID LIKE "%G4%" OR MAC LIKE "%G4%" OR LICENSE LIKE "%G4%" OR MD5 LIKE "%G4%" OR FNAME LIKE "%G4%" OR LNAME LIKE "%G4%" OR REGDATE LIKE "%G4%";
-
-
-
-
-
-SELECT ID, LICENSE from LicenseTable;
-
-delete from LicenseTable where LICENSE = 'QC26P8J58GL404C34R82S721';
-
-select LICENSE FROM LicenseTable WHERE ID = '3';
-
-
-select ID from LicenseTable where MD5 = 'QJ71D9M58PQ263H64E14M833';
-
 
 INSERT INTO LicenseTable(LICENSE,MD5) VALUES('QC26P8J58GL404C34R82S721','290415A2BB1A67E3AC9DD56C1AAB5307');
 INSERT INTO LicenseTable(LICENSE,MD5) VALUES('YB11V0S28SA304M60V25K114','1063E7CEC92DFFAD9EDC5FE6DE451D7D');

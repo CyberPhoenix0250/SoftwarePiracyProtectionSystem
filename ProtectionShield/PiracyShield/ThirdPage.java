@@ -134,33 +134,36 @@ class ThirdPage
 			public void mouseClicked(MouseEvent e)
 			{
 				log.writeLog("");
-				if(checkConnectivity())
+				if(btnNext.isEnabled())
 				{
-					btnNext.setEnabled(true);
-					if(isCorrect)
+					if(checkConnectivity())
 					{
-						log.writeLog("Goto Fourth Page");
-						m.LicenseKey = textField.getText();
-						window.getContentPane().removeAll();
-						window.repaint();
-						new FourthPage(m);
+						if(isCorrect)
+						{
+							btnNext.setEnabled(true);
+							log.writeLog("Goto Fourth Page");
+							m.LicenseKey = textField.getText();
+							window.getContentPane().removeAll();
+							window.repaint();
+							new FourthPage(m);
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(window, "Please enter a valid license key", "Invalid Key",
+									JOptionPane.INFORMATION_MESSAGE);
+						}
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(window, "Please enter a valid license key", "Invalid Key",
+						JOptionPane.showMessageDialog(window, "Registration requires internet connection", "No internet",
 								JOptionPane.INFORMATION_MESSAGE);
 					}
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(window, "Registration requires internet connection", "No internet",
-							JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
 		btnNext.setFont(new Font("Alice", Font.BOLD, 16));
 		btnNext.setBounds(474, 410, 95, 27);
-		btnNext.setEnabled(true);
+		btnNext.setEnabled(false);
 		window.getContentPane().add(btnNext);
 		
 		textField = new JTextField();
