@@ -71,6 +71,10 @@ and this means that the license key is fake. Note that all the license keys are 
 </p>
 
 <h3><u>Quick Glance</u></h3>
-<a href="res/Preview.html">Click here for a quick glance</a>
+<center>
+        <video width="500" height="400" controls preload> 
+          <source src="res/Softwarepiracy-1.webm"></source> 
+        </video>
+</center>
 </body>
 </html>
