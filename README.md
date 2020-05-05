@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Software Piracy Protection System</title>
   <h1><center>Software Piracy Protection System</center></h1>
 </head>
 <body>
