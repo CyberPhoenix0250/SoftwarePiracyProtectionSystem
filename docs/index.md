@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,7 +6,7 @@
   <h1><center>Software Piracy Protection System</center></h1>
 </head>
 <body>
-<h2><u>Introduction</u></h3>
+<h3><u>Introduction</u></h3>
 <p>
   The project is intended to stop the piracy of the software application, a methodology is embedded inside
   the software application, which is required to be protected from piracy. This methodology includes
@@ -19,7 +18,7 @@
   application. Once the installation is successful then the MAC address is used for offline authentication
   so that its counterfeit copy cannot run on any other computer.
 </p>
-<h2><u>How it Works</u></h3>
+<h3><u>How it Works</u></h3>
 <p>
 The proposed methodology can be embedded into any software application in order to prevent it from
 being pirated, it works in the following way:-
@@ -72,7 +71,7 @@ and this means that the license key is fake. Note that all the license keys are 
   <center><img alt="Scenario 3" src="res/Offline.jpg"></center>
 </p>
 
-<h2><u>Quick Glance</u></h3>
+<h3><u>Quick Glance</u></h3>
 <center>
 <video width="1024" height="720" controls preload> 
   <source src="res/Softwarepiracy-1.webm"></source> 
