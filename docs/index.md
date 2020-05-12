@@ -31,8 +31,30 @@ encryption of key to protect license key over the internet. After encryption the
 API looks for the Hash (received from the client) in database. The Server consist of a
 database which keeps the list of all valid license Keys and their corresponding MD5 hash, moreover
 these License keys are associated with a MAC address of user, who wants to register their
-genuine copy of the software application, therefore there are 2 Scenario :-
+genuine copy of the software application.
 </p>
+
+<p>
+  <b>General Working</b>: The license key received by the API from the client PC is present in the database and
+  there is no MAC address associated with it. It means the license key received has never been
+  registered and it’s a genuine registration which should be allowed, and API asks the client
+  application to send its MAC address to register in the database to avoid duplicate registration.
+  <center><img alt="Scenario 3" src="res/Online.jpg"></center>
+</p>
+
+<p>
+  <b>Offline Mode</b>: When the software application is successfully installed, internet connection is not required for the
+  software to run, now the question arises that if somebody copies the installed software application
+  and try to run on another computer. Still the software application will run only on the system for which it was registered   because every time the software boots up, the MAC
+  address registered into the software application at the time of installation is matched with the current
+  system’s MAC address. Therefore running that application on any other system will not work since
+  every system has a unique MAC address.
+  <center><img alt="Scenario 3" src="res/Offline.jpg"></center>
+</p>
+
+<h3><u>Different Scenarios</u></h3>
+<p>Following are two scenarios.</p>
+
 <p>
 <b>Scenario 1</b>: The license key received by API from Client PC is present in the database, but
 there is a MAC address already registered with it. This means that the license key has already been
@@ -48,25 +70,7 @@ and it means that the license key is fake.<br> <b>Note :</b> The genuine and val
 <center><img alt="Scenario 2" src="res/TypeB.jpg"></center>
 </p>
 
-<p>
-  <b>General Working</b>: The license key received by the API from the client PC is present in the database and
-  there is no MAC address associated with it. It means the license key received has never been
-  registered and it’s a genuine registration which should be allowed, and API asks the client
-  application to send its MAC address to register in the database to avoid duplicate registration.
-  <center><img alt="Scenario 3" src="res/Online.jpg"></center>
-</p>
 
-<p>
-  <b>Offline Mode</b>: Now the software application is successfully installed, now internet connection is not required for the
-  software to start, here the question arises that if anybody copied the installed software application
-  and tried to run it on any other computer, then technically it should run on that pc because it has already
-  been registered on the server, and now there is no restrictions left. Still the software application will run
-  only on that system in which it was registered because every time the software boots up, the MAC
-  address registered into the software application at the time of installation is checked with the current
-  system’s MAC address. Therefore running that application on any other system will not work since
-  every system have a unique MAC address.
-  <center><img alt="Scenario 3" src="res/Offline.jpg"></center>
-</p>
 
 <h3><u>Quick Glance</u></h3>
 <center>
