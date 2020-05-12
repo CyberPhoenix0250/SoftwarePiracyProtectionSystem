@@ -20,9 +20,7 @@
 </p>
 <h3><u>How it Works</u></h3>
 <p align='justify'>
-The proposed methodology can be embedded into any software application in order to prevent it from
-piracy, it works in the following way:-<br>
-  
+The proposed methodology can be embedded into any software application in order to prevent it from piracy, it works in the following way:-<br>  
 During the installation, setup requires an active internet connection for successful completion of installation of software.
 When the genuine license key is entered into software application. The license key is feeded to the authentication program and subsequently the key is again fed to the MD5 hash function for the encryption of key to protect license key over the internet. After encryption the encrypted hash is returned to Software application and then the application transmits the hash to authentication server and from there it goes to the API and API looks for the Hash (received from the client) in database. The Server consist of a database which keeps the list of all valid license Keys and their corresponding MD5 hash, moreover
 these License keys are associated with a MAC address of user, who wants to register their genuine copy of the software application.
