@@ -19,7 +19,7 @@
   so its copy cannot run on any other computer.
 </p>
 <h3><u>How it Works</u></h3>
-<p align=”justify”>
+<p align='justify'>
 The proposed methodology can be embedded into any software application in order to prevent it from
 piracy, it works in the following way:-<br>
   
@@ -34,7 +34,7 @@ these License keys are associated with a MAC address of user, who wants to regis
 genuine copy of the software application.
 </p>
 
-<p align=”justify”>
+<p align='justify'>
   <b>General Working</b>: The license key received by the API from the client PC is present in the database and
   there is no MAC address associated with it. It means the license key received has never been
   registered and it’s a genuine registration which should be allowed, and API asks the client
@@ -42,7 +42,7 @@ genuine copy of the software application.
   <center><img alt="Scenario 3" src="res/Online.jpg"></center>
 </p>
 
-<p align=”justify”>
+<p align='justify'>
   <b>Offline Mode</b>: When the software application is successfully installed, internet connection is not required for the
   software to run, now the question arises that if somebody copies the installed software application
   and try to run on another computer. Still the software application will run only on the system for which it was registered   because every time the software boots up, the MAC
@@ -55,7 +55,7 @@ genuine copy of the software application.
 <h3><u>Different Scenarios</u></h3>
 <p>Following are two scenarios.</p>
 
-<p align=”justify”>
+<p align='justify'>
 <b>Scenario 1</b>: The license key received by API from Client PC is present in the database, but
 there is a MAC address already registered with it. This means that the license key has already been
 registered to a PC and the MAC address belongs to that PC in which it is registered. Therefore, the
@@ -64,7 +64,7 @@ API will not allow client’s application to register. Hence if the registration
 </p>
 
 
-<p align=”justify”>
+<p align='justify'>
 <b>Scenario 2</b>: The license key received by the API from the client PC is not present in database
 and it means that the license key is fake.<br> <b>Note :</b> The genuine and valid license key are present in the server.
 <center><img alt="Scenario 2" src="res/TypeB.jpg"></center>
