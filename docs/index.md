@@ -8,54 +8,51 @@
 <body>
 <h3><u>Introduction</u></h3>
 <p>
-  The project is intended to stop the piracy of the software application, a methodology is embedded inside
-  the software application, which is required to be protected from piracy. This methodology includes
-  using of authentication server for license key authorization, and the registration of the license key with
-  the corresponding MAC address. The methodology makes use of the Authentication server checks and
-  registers the software application, even in the offline mode this methodology works well and does not
-  allow any counterfeit copy of the software application to run on any other computer. Authentication
-  and registration of the software application are done only during the installation of the software
-  application. Once the installation is successful then the MAC address is used for offline authentication
-  so that its counterfeit copy cannot run on any other computer.
+  The project is intended to stop the piracy of software application. A methodology is embedded in
+  the software application, which can protects any software from piracy. This methodology includes
+  using of authentication server for license key authorization and registration of license key with
+  corresponding MAC address. The methodology utilizes authentication server checks and
+  registers the MAC address of the user. This methodology works well even in the offline mode and does not
+  allow any counterfeit(fake) copy of the software application to run on any other computer. Authentication
+  and registration of software application is done only during the installation of software
+  application. Once the installation is successful then the MAC address is used for offline authentication,
+  so its copy cannot run on any other computer.
 </p>
 <h3><u>How it Works</u></h3>
 <p>
 The proposed methodology can be embedded into any software application in order to prevent it from
-being pirated, it works in the following way:-
-During the installation time, the software installer requires an active internet connection for complete
-successful installation of the software into the machine.
-When the genuine license key goes into the software application, the application feeds that license
-key to the Authentication Program and after that, the key again fed to the MD5 hash function for the
-encryption of the key. In order to protect the license key over the internet, the license key is passed to
-the MD5 function, after the encryption the encrypted hash is returned to the Software application and
-then the application transmits the hash to Authentication server and from there it goes to the API and
-the API looks for the Hash (received from the client) into the database. The Server consist of a
-database which keeps the list of all the License Keys and their corresponding MD5 hashes, moreover
-these License keys are associated with a MAC address of the user who wants to register their
-legitimate copy of the software application, therefore there are 2 Scenario :-
+piracy, it works in the following way:-<br>
+  
+During the installation, setup requires an active internet connection for successful completion of
+installation of software.
+When the genuine license key is entered into software application. The license
+key is feeded to the authentication program and subsequently the key is again fed to the MD5 hash function for the
+encryption of key to protect license key over the internet. After encryption the encrypted hash is returned to Software application and then the application transmits the hash to authentication server and from there it goes to the API and
+API looks for the Hash (received from the client) in database. The Server consist of a
+database which keeps the list of all valid license Keys and their corresponding MD5 hash, moreover
+these License keys are associated with a MAC address of user, who wants to register their
+genuine copy of the software application, therefore there are 2 Scenario :-
 </p>
 <p>
-<b>Scenario 1</b>: The license key received by the API from the Client PC is present in the database but
+<b>Scenario 1</b>: The license key received by API from Client PC is present in the database, but
 there is a MAC address already registered with it. This means that the license key has already been
 registered to a PC and the MAC address belongs to that PC in which it is registered. Therefore, the
-API will not allow the client’s Application to register and if the registration fails, the installation on
-the client side fails.
+API will not allow client’s application to register. Hence if the registration fails, the installation also fails.
 <center><img alt="Scenario 1" src="res/TypeA.jpg"></center>
 </p>
 
 
 <p>
-<b>Scenario 2</b>: The license key received by the API from the Client PC is not present in the database
-and this means that the license key is fake. Note that all the license keys are already present in the server, and only those keys are genuine.
+<b>Scenario 2</b>: The license key received by the API from the client PC is not present in database
+and it means that the license key is fake.<br> <b>Note :</b> The genuine and valid license key are present in the server.
 <center><img alt="Scenario 2" src="res/TypeB.jpg"></center>
 </p>
 
 <p>
-  <b>General Working</b>: The license key received by the API from the Client PC is present in the database and
-  there is no MAC address associated with it. This means that the license key received is never been
-  registered yet and it’s a new registration which should be allowed, and the API asks the client
-  Application to give its MAC address to register it in the Database so that nobody else can use the
-  same license key twice.
+  <b>General Working</b>: The license key received by the API from the client PC is present in the database and
+  there is no MAC address associated with it. It means the license key received has never been
+  registered and it’s a genuine registration which should be allowed, and API asks the client
+  application to send its MAC address to register in the database to avoid duplicate registration.
   <center><img alt="Scenario 3" src="res/Online.jpg"></center>
 </p>
 
