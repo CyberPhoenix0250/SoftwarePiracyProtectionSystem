@@ -7,7 +7,7 @@
 </head>
 <body>
 <h3><u>Introduction</u></h3>
-<p align=”justify”>
+<p align='justify'>
   The project is intended to stop the piracy of software application. A methodology is embedded in
   the software application, which can protects any software from piracy. This methodology includes
   using of authentication server for license key authorization and registration of license key with
