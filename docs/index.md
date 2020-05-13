@@ -65,7 +65,7 @@ and it means that the license key is fake.<br> <b>Note :</b> The genuine and val
 
 
 <h3><u>Quick Glance</u></h3>
-<video width="200" height="200" controls preload> 
+<video width="350" height="350" controls preload> 
   <source src="res/Softwarepiracy-1.webm"></source> 
 </video>
 </body>
